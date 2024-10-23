@@ -1,0 +1,2 @@
+#ignore the remote sync file when uploading
+.remote-sync.json
