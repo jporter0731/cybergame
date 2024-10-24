@@ -1,13 +1,13 @@
-<?php require('../private/initialize.php');?>
+<?php require('private/initialize.php');?>
 <html lang="en">
 <head>
-    <?php include('private/header.php'); ?>
+    <?php include(PRIVATE_PATH . '/header.php'); ?>
     <!-- Core theme CSS (includes Bootstrap) -->
     <link href="css/styles.css" rel="stylesheet" />
 </head>
 <body>
     <!-- Responsive navbar -->
-    <?php include('private/nav_bar.php'); ?>
+    <?php include(PRIVATE_PATH . '/nav_bar.php'); ?>
 
     <!-- Page content -->
     <div class="container">

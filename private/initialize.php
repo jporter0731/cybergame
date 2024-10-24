@@ -5,7 +5,6 @@
   // dirname() returns the path to the parent directory
   define("PRIVATE_PATH", dirname(__FILE__));
   define("PROJECT_PATH", dirname(PRIVATE_PATH));
-  define("SHARED_PATH", PRIVATE_PATH . '/shared');
   define("RESOURCE_PATH", PROJECT_PATH . '/resources');
 
   // Assign the root URL to a PHP constant

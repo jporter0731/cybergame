@@ -2,13 +2,13 @@
 
 <html lang="en">
     <head>
-        <?php include('../private/header.php'); ?>
+        <?php include(PRIVATE_PATH . '/header.php'); ?>
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="../css/styles.css" rel="stylesheet" />
     </head>
     <body>
         <!-- Responsive navbar-->
-        <?php include('../private/nav_bar.php'); ?>
+        <?php include(PRIVATE_PATH . '/nav_bar.php'); ?>
         <!-- Page content-->
         <div class="container">
             <div class="text-center mt-5">
@@ -33,7 +33,7 @@
 			</div>
 			<!--Put current guess here-->
 			<!--put symbol keyboard here-->
-      <?php include('../private/keyboard.php'); ?>
+      <?php include(PRIVATE_PATH . '/keyboard.php'); ?>
 		</div>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
