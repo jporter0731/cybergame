@@ -5,7 +5,7 @@
   // dirname() returns the path to the parent directory
   define("PRIVATE_PATH", dirname(__FILE__));
   define("PROJECT_PATH", dirname(PRIVATE_PATH));
-  define("RESOURCE_PATH", PROJECT_PATH . '/resources');
+  define("RESOURCE_PATH", '/cybergame/resources/');
 
   // Assign the root URL to a PHP constant
   // * Do not need to include the domain

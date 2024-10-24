@@ -2,12 +2,12 @@
     require('../private/initialize.php');
 
     $passcode = [
-        "../resources/character1.png",
-        "../resources/character12.png",
-        "../resources/character5.png",
-        "../resources/character8.png",
-        "../resources/character10.png",
-        "../resources/character18.png"
+        RESOURCE_PATH . "character1.png",
+        RESOURCE_PATH . "character12.png",
+        RESOURCE_PATH . "character5.png",
+        RESOURCE_PATH . "character8.png",
+        RESOURCE_PATH . "character10.png",
+        RESOURCE_PATH . "character18.png"
     ];
 ?>
 <html lang="en">
