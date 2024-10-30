@@ -1,14 +1,23 @@
 <?php
     require('../private/initialize.php');
 
-    $passcode = [
-        RESOURCE_PATH . "character1.png",
-        RESOURCE_PATH . "character12.png",
-        RESOURCE_PATH . "character5.png",
-        RESOURCE_PATH . "character8.png",
-        RESOURCE_PATH . "character10.png",
-        RESOURCE_PATH . "character18.png"
-    ];
+    //SQL Query to get information from the database table
+    $patternSQL = "SELECT * FROM patterns WHERE pattern_id=100006";
+    $guessesSQL = "SELECT * FROM guesses WHERE correct_pattern=100006";
+    $correctGuessesSQL = $guessesSQL. " AND correct_guess=1";
+
+    //Get the passcode infomration
+    $pattern_set = mysqli_query($db, $patternSQL);
+    $passcode = mysqli_fetch_assoc($pattern_set);
+
+    //Get the number of guesses on this pattern
+    $guesses_set = mysqli_query($db, $guessesSQL);
+    $guesses = mysqli_num_rows($guesses_set);
+
+    //get the correct number of guesses on this pattern
+    $guesses_set = mysqli_query($db, $correctGuessesSQL);
+    $correctGuesses = mysqli_num_rows($guesses_set);
+
 ?>
 <html lang="en">
     <head>
@@ -22,13 +31,20 @@
         <!-- Page content-->
         <div class="text-center mt-5">
             <h1>Here is Your Passcode</h1>
-            <p class="lead">Number of Guesses: #####</p>
-            <p class="lead">Number of Correct Guesses: #####</p>
+            <p class="lead">Number of Guesses: <?php echo $guesses; ?></p>
+            <p class="lead">Number of Correct Guesses: <?php echo $correctGuesses; ?></p>
         </div>
         <div class="image-container">
           <?php
-            foreach ($passcode as $symbol){
-              echo "<img src=$symbol width=80 />";
+            // Exclude pattern_id and difficulty from showing up
+            $excludedKeys = ['pattern_id', 'difficulty'];
+
+            foreach ($passcode as $key => $symbol){
+              // Checks if the char is set and skips over the ignored values
+              if (isset($symbol) && !(in_array($key, $excludedKeys))){
+                $image = RESOURCE_PATH. $symbol;
+                echo "<img src=$image width=80 />";
+              }
             }
           ?>
         </div>
