@@ -1,22 +1,7 @@
 <?php
     require('../private/initialize.php');
 
-    //SQL Query to get information from the database table
-    $patternSQL = "SELECT * FROM patterns WHERE pattern_id=100006";
-    $guessesSQL = "SELECT * FROM guesses WHERE correct_pattern=100006";
-    $correctGuessesSQL = $guessesSQL. " AND correct_guess=1";
-
-    //Get the passcode infomration
-    $pattern_set = mysqli_query($db, $patternSQL);
-    $passcode = mysqli_fetch_assoc($pattern_set);
-
-    //Get the number of guesses on this pattern
-    $guesses_set = mysqli_query($db, $guessesSQL);
-    $guesses = mysqli_num_rows($guesses_set);
-
-    //get the correct number of guesses on this pattern
-    $guesses_set = mysqli_query($db, $correctGuessesSQL);
-    $correctGuesses = mysqli_num_rows($guesses_set);
+    $passcode = view_passcode_queries($db, 12312);
 
 ?>
 <html lang="en">
@@ -31,13 +16,13 @@
         <!-- Page content-->
         <div class="text-center mt-5">
             <h1>Here is Your Passcode</h1>
-            <p class="lead">Number of Guesses: <?php echo $guesses; ?></p>
-            <p class="lead">Number of Correct Guesses: <?php echo $correctGuesses; ?></p>
+            <p class="lead">Number of Guesses: <?php echo $passcode['guesses']; ?></p>
+            <p class="lead">Number of Correct Guesses: <?php echo $passcode['correct_guesses']; ?></p>
         </div>
         <div class="image-container">
           <?php
             // Exclude pattern_id and difficulty from showing up
-            $excludedKeys = ['pattern_id', 'difficulty'];
+            $excludedKeys = ['guesses', 'correct_guesses'];
 
             foreach ($passcode as $key => $symbol){
               // Checks if the char is set and skips over the ignored values
