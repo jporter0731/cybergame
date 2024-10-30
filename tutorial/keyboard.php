@@ -18,7 +18,7 @@
 			<!-- The below code was created using the assistance of ChatGPT 4.0. All code was properly tested and works as intended -->
       <div class="current-guess">Current Guess</div>
       <div id="output"></div>
-      
+
       <div class="keyboard">
           <?php
           // Define an array of key images (placeholders for 18 keys)
@@ -140,9 +140,5 @@
           }
       </script>
 		</div>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
     </body>
-</html>
+<?php include(PRIVATE_PATH . '/footer.php'); ?>
