@@ -6,6 +6,7 @@
   define("PRIVATE_PATH", dirname(__FILE__));
   define("PROJECT_PATH", dirname(PRIVATE_PATH));
   define("RESOURCE_PATH", '/cybergame/resources/');
+  define("CSS_PATH", '/cybergame/css/styles.css');
 
   // Assign the root URL to a PHP constant
   // * Do not need to include the domain

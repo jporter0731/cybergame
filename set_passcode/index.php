@@ -5,7 +5,7 @@
     <head>
         <?php include(PRIVATE_PATH . '/header.php'); ?>
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="../css/styles.css" rel="stylesheet" />
+        <link href=<?php echo CSS_PATH; ?> rel="stylesheet" />
     </head>
     <body>
         <!-- Responsive navbar-->
