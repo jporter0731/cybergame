@@ -1,4 +1,24 @@
-<?php require('../private/initialize.php');?>
+<?php
+require('../private/initialize.php');
+require('example.php');
+
+// Example Data
+$yellowCharacters = [
+    ['image' => '../resources/character1.png', 'alt' => 'Character 1'],
+    ['image' => '../resources/character8.png', 'alt' => 'Character 8'],
+    ['image' => '../resources/character12.png', 'alt' => 'Character 12'],
+];
+
+// Full Example Data
+$fullExampleCharacters = [
+    ['image' => '../resources/character1.png', 'alt' => 'Character 1', 'class' => 'colorrd'],
+    ['image' => '../resources/character5.png', 'alt' => 'Character 5', 'class' => 'colorgn'],
+    ['image' => '../resources/character12.png', 'alt' => 'Character 12', 'class' => 'coloryl'],
+    ['image' => '../resources/character13.png', 'alt' => 'Character 13', 'class' => 'colorgn'],
+    ['image' => '../resources/character8.png', 'alt' => 'Character 8', 'class' => 'coloryl'],
+    ['image' => '../resources/character16.png', 'alt' => 'Character 16', 'class' => 'colorrd'],
+];
+?>
 
 <html lang="en">
     <head>
@@ -23,13 +43,13 @@
                 <h3>Receive Feedback on Your Guess</h3>
                 <p class="lead">Once your guess is submitted, the game will provide immediate feedback to guide you on your journey:<br/></p>
                 <p class="lead">Red Background: This signifies that the symbol you guessed is not included in the passcode at all. Discard this symbol from your future guesses!<br/></p>
-                <?php include('../tutorial/example_red.php'); ?>
+                <?php echo createCharacterTableOneColor($yellowCharacters, "colorrd"); ?>
                 <p class="lead">Yellow Background: A yellow background indicates that the symbol is present in the passcode, but it’s in the wrong position. This means you're on the right track, but adjustments are needed.<br/></p>
-                <?php include('../tutorial/example_yellow.php'); ?>
+                <?php echo createCharacterTableOneColor($yellowCharacters, "coloryl"); ?>
                 <p class="lead">Green Background: A green background means that the symbol is correctly placed within the passcode! You’re getting closer to cracking the code!<br/></p>
-                <?php include('../tutorial/example_green.php'); ?>
+                <?php echo createCharacterTableOneColor($yellowCharacters, "colorgn"); ?>
                 <p class="lead">A complete guess will look something like this.</p>
-                <?php include('../tutorial/example_full.php'); ?>
+                <?php echo createCharacterTable($fullExampleCharacters); ?>
                 </p>
             </div>
             <div class="text-center mt-5">
