@@ -54,4 +54,39 @@
 
     return $guessInfo;
   }
+
+  // Get the information about the patterns that you can guess (used for the pick_passcode page)
+  function get_available_patterns($connection){
+    $getPatternSQL = "SELECT pattern_id, difficulty FROM patterns WHERE difficulty IS NOT NULL;";
+    $pattern_set = mysqli_query($connection, $getPatternSQL);
+
+    while($pattern = mysqli_fetch_assoc($pattern_set)){
+      //Figure out how many guesses a user made on a specific pattern
+      $sqlPasscodes = "SELECT correct_guess FROM guesses WHERE user_guessing=". USER_ID. " AND correct_pattern=". $pattern['pattern_id'];
+      $guess_set = mysqli_query($connection, $sqlPasscodes);
+
+      $guessCount = mysqli_num_rows($guess_set);
+      $status = 'In Progress';
+
+      //Cycle through the guesses and see if any ore correct
+      while($correctGuess = mysqli_fetch_assoc($guess_set)){
+        if ($correctGuess['correct_guess'] == 1){
+          $status = 'Complete';
+        }
+      }
+      if($guessCount == 0){
+        $status = 'Not Started';
+      }
+
+      //Add the information found to the passcodes array to be passed to the page
+      $passcodes[] = [
+        'id' => $pattern['pattern_id'],
+        'difficulty' => $pattern['difficulty'],
+        'status' => $status,
+        'guess_count' => $guessCount
+      ];
+    }
+
+    return $passcodes;
+  }
 ?>

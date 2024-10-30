@@ -2,35 +2,7 @@
   require('../private/initialize.php');
 
   // Get a list of all the patterns in the database that can be guessed
-  $passcodes;
-
-  $getPatternSQL = "SELECT pattern_id, difficulty FROM patterns WHERE difficulty IS NOT NULL;";
-  $pattern_set = mysqli_query($db, $getPatternSQL);
-
-  while($pattern = mysqli_fetch_assoc($pattern_set)){
-    //Figure out how many guesses a user made on a specific pattern
-    $sqlPasscodes = "SELECT correct_guess FROM guesses WHERE user_guessing=". USER_ID. " AND pattern_guessed=". $pattern['pattern_id'];
-    $guess_set = mysqli_query($db, $sqlPasscodes);
-
-    $guessCount = mysqli_num_rows($guess_set);
-    $status = 'In Progress';
-
-    while($correctGuess = mysqli_fetch_assoc($guess_set)){
-      if ($correctGuess['correct_guess'] == 1){
-        $status = 'Complete';
-      }
-    }
-    if($guessCount == 0){
-      $status = 'Not Started';
-    }
-
-    $passcodes[] = [
-      'id' => $pattern['pattern_id'],
-      'difficulty' => $pattern['difficulty'],
-      'status' => $status,
-      'guess_count' => $guessCount
-    ];
-  }
+  $passcodes = get_available_patterns($db);
 
   // Get guess info for the users passcode
   $guessInfo = get_guess_info($db);
@@ -81,9 +53,13 @@
                                     <li class="list-group-item">Status: <?php echo $passcode['status']; ?></li>
                                     <li class="list-group-item">Guess Count: <?php echo $passcode['guess_count']; ?></li>
                                 </ul>
-                                <div class="card-footer">
-                                    <a href= <?php echo url_for('guess_page'); ?> class="card-link">View Passcode</a>
-                                </div>
+                                <?php
+                                  if($passcode['status'] !== 'Complete'){ ?>
+                                    <div class="card-footer">
+                                    	<a href= <?php echo url_for('guess_page'); ?> class="card-link">View Passcode</a>
+                                    </div>
+                                <?php  }
+                                ?>
                             </div>
                         </div>
                     <?php endforeach; ?>
