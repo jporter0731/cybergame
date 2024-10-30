@@ -1,5 +1,12 @@
 <?php
   require('../private/initialize.php');
+
+  $getPatternSQL = "SELECT pattern_id, difficulty FROM patterns WHERE difficulty IS NOT NULL;";
+  $pattern_set = mysqli_query($db, $getPatternSQL);
+
+  // Get guess info for the users passcode
+  $guessInfo = get_guess_info($db);
+
   $passcodes = [
     [
         'id' => 1,
@@ -109,8 +116,8 @@
                         <div class="card" style="width: 18rem;">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">Your Passcode</li>
-                                <li class="list-group-item">Correct Guesses: ####</li>
-                                <li class="list-group-item">Total Guesses: ####</li>
+                                <li class="list-group-item">Correct Guesses: <?php echo $guessInfo['correct_guesses']; ?></li>
+                                <li class="list-group-item">Total Guesses: <?php echo $guessInfo['guesses']; ?></li>
                             </ul>
                         </div>
                     </div>

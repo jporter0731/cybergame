@@ -1,7 +1,7 @@
 <?php
     require('../private/initialize.php');
 
-    $passcode = view_passcode_queries($db, 12312);
+    $passcode = view_passcode_queries($db);
 
 ?>
 <html lang="en">

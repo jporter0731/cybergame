@@ -13,11 +13,9 @@
   }
 
   // SQL Query to show data based on a specific id (used for the view_passcode page)
-  function view_passcode_queries($connection, $user_id){
+  function view_passcode_queries($connection){
     //SQL Query to get information from the database table
-    $patternSQL = "SELECT * FROM patterns WHERE pattern_id=". $user_id;
-    $guessesSQL = "SELECT * FROM guesses WHERE correct_pattern=". $user_id ;
-    $correctGuessesSQL = $guessesSQL. " AND correct_guess=1";
+    $patternSQL = "SELECT * FROM patterns WHERE pattern_id=". USER_PATTERN_ID;
 
     //Get the passcode infomration
     $pattern_set = mysqli_query($connection, $patternSQL);
@@ -26,6 +24,21 @@
     //remove the passcode id and difficulty from the list
     unset($passcode_info['pattern_id']);
     unset($passcode_info['difficulty']);
+
+    //get the guess info using the get_guess_info function
+    $myPatternInfo = get_guess_info($connection);
+
+    foreach ($myPatternInfo as $key => $value) {
+      $passcode_info[$key] = $value;
+    }
+
+    return $passcode_info;
+  }
+
+  // Get the information about the users pattern (total guesses and correct guesses)
+  function get_guess_info($connection){
+    $guessesSQL = "SELECT * FROM guesses WHERE correct_pattern=". USER_PATTERN_ID;
+    $correctGuessesSQL = $guessesSQL. " AND correct_guess=1";
 
     //Get the number of guesses on this pattern
     $guesses_set = mysqli_query($connection, $guessesSQL);
@@ -36,9 +49,9 @@
     $correctGuesses = mysqli_num_rows($guesses_set);
 
     //Add the values from above to the info array
-    $passcode_info['guesses'] = $guesses;
-    $passcode_info['correct_guesses'] = $correctGuesses;
+    $guessInfo['guesses'] = $guesses;
+    $guessInfo['correct_guesses'] = $correctGuesses;
 
-    return $passcode_info;
+    return $guessInfo;
   }
 ?>
