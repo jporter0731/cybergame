@@ -1,7 +1,7 @@
 <?php
 function createCharacterButton($imagePath, $altText, $class) {
     return "
-        <td class='$class'>
+        <td class='$class' style='text-align: center;'>
             <button class='btn btn-default'>
                 <img src='$imagePath' width='80' alt='$altText' />
             </button>
