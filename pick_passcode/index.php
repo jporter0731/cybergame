@@ -1,92 +1,40 @@
 <?php
   require('../private/initialize.php');
 
+  // Get a list of all the patterns in the database that can be guessed
+  $passcodes;
+
   $getPatternSQL = "SELECT pattern_id, difficulty FROM patterns WHERE difficulty IS NOT NULL;";
   $pattern_set = mysqli_query($db, $getPatternSQL);
+
+  while($pattern = mysqli_fetch_assoc($pattern_set)){
+    //Figure out how many guesses a user made on a specific pattern
+    $sqlPasscodes = "SELECT correct_guess FROM guesses WHERE user_guessing=". USER_ID. " AND pattern_guessed=". $pattern['pattern_id'];
+    $guess_set = mysqli_query($db, $sqlPasscodes);
+
+    $guessCount = mysqli_num_rows($guess_set);
+    $status = 'In Progress';
+
+    while($correctGuess = mysqli_fetch_assoc($guess_set)){
+      if ($correctGuess['correct_guess'] == 1){
+        $status = 'Complete';
+      }
+    }
+    if($guessCount == 0){
+      $status = 'Not Started';
+    }
+
+    $passcodes[] = [
+      'id' => $pattern['pattern_id'],
+      'difficulty' => $pattern['difficulty'],
+      'status' => $status,
+      'guess_count' => $guessCount
+    ];
+  }
 
   // Get guess info for the users passcode
   $guessInfo = get_guess_info($db);
 
-  $passcodes = [
-    [
-        'id' => 1,
-        'difficulty' => 'easy',
-        'status' => 'not started',
-        'guess_count' => 10
-    ],
-    [
-        'id' => 2,
-        'difficulty' => 'easy',
-        'status' => 'in progress',
-        'guess_count' => 5
-    ],
-    [
-        'id' => 3,
-        'difficulty' => 'easy',
-        'status' => 'complete',
-        'guess_count' => 8
-    ],
-    [
-        'id' => 4,
-        'difficulty' => 'medium',
-        'status' => 'not started',
-        'guess_count' => 15
-    ],
-    [
-        'id' => 5,
-        'difficulty' => 'medium',
-        'status' => 'in progress',
-        'guess_count' => 20
-    ],
-    [
-        'id' => 6,
-        'difficulty' => 'medium',
-        'status' => 'complete',
-        'guess_count' => 30
-    ],
-    [
-        'id' => 7,
-        'difficulty' => 'hard',
-        'status' => 'not started',
-        'guess_count' => 40
-    ],
-    [
-        'id' => 8,
-        'difficulty' => 'hard',
-        'status' => 'in progress',
-        'guess_count' => 50
-    ],
-    [
-        'id' => 9,
-        'difficulty' => 'hard',
-        'status' => 'complete',
-        'guess_count' => 60
-    ],
-    [
-        'id' => 10,
-        'difficulty' => 'extreme',
-        'status' => 'not started',
-        'guess_count' => 70
-    ],
-    [
-        'id' => 11,
-        'difficulty' => 'extreme',
-        'status' => 'in progress',
-        'guess_count' => 80
-    ],
-    [
-        'id' => 12,
-        'difficulty' => 'extreme',
-        'status' => 'complete',
-        'guess_count' => 90
-    ],
-    [
-        'id' => 13,
-        'difficulty' => 'extreme',
-        'status' => 'complete',
-        'guess_count' => 90
-    ],
-  ];
 ?>
 
 <!DOCTYPE html>

@@ -6,6 +6,6 @@
   define("DB_NAME", "cybergame");
 
   //For testing once fully implimented this might change
-  define("USER_ID", 43210);
+  define("USER_ID", 1);
   define("USER_PATTERN_ID", 43210);
  ?>
