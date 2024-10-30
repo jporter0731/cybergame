@@ -17,6 +17,7 @@
                 <p class="lead">Create your passcode below to embark on your journey through the galaxy. Your passcode must be no more than 6 symbols long, and you can use symbols more than once. Let your imagination guide you as you craft a passcode that reflects your unique style and readiness for adventure. Get ready to dive into the mysteries of the cosmos!</p>
             </div>
 			<!-- The below code was created using the assistance of ChatGPT 4.0. All code was properly tested and works as intended -->
+      <div id="output"></div>
       <div class="keyboard">
           <?php
           // Define an array of key images (placeholders for 18 keys)
@@ -40,7 +41,9 @@
             'B' => RESOURCE_PATH . 'character17.png',
             'N' => RESOURCE_PATH . 'character18.png',
           ];
+          ?>
 
+          <?php
           // Display only the first 18 keys
           foreach (array_slice($keys, 0, 18) as $key => $image) {
               echo "<div class='key' onclick=\"addToOutput('$image', '$key')\"><img src='$image' alt='$key'></div>";
@@ -53,8 +56,6 @@
           <button class="galactic-button" onclick="removeLast()">Back</button>
           <button class="galactic-button" onclick="submitOutput()">Submit</button> <!-- FIXME: Implement functionality later -->
       </div>
-
-      <div id="output"></div>
 
       <script>
           // Create a mapping of keys to image sources

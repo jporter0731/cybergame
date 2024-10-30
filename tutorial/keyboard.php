@@ -16,6 +16,9 @@
                 <p class="lead">Welcome to the Keyboard Tutorial! Here, you can familiarize yourself with the controls for Passcode Protector. The keys and their corresponding symbols are mapped below, giving you the tools you need to navigate this interstellar challenge. Use this page to practice and get comfortable with the keyboard before you venture into the game. Sharpen your skills, and prepare to unlock the mysteries of the galaxy!</p>
             </div>
 			<!-- The below code was created using the assistance of ChatGPT 4.0. All code was properly tested and works as intended -->
+      <div class="current-guess">Current Guess</div>
+      <div id="output"></div>
+      
       <div class="keyboard">
           <?php
           // Define an array of key images (placeholders for 18 keys)
@@ -54,9 +57,6 @@
           <button class="galactic-button" onclick="removeLast()" style='height: 80px;'>Back<br />(Backspace)</button>
           <button class="galactic-button" onclick="submitOutput()" style='height: 80px;'>Submit<br />(Enter)</button>
       </div>
-
-      <div class="current-guess">Current Guess</div>
-      <div id="output"></div>
 
       <div class="button-container">
           <button class="galactic-button" onclick="location.href='<?php echo url_for("tutorial") ?>';">Back to Tutorial</button>
