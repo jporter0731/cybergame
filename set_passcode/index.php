@@ -41,7 +41,7 @@
 
           <?php
           // Display only the first 18 keys
-          foreach (array_slice($keys, 0, 18) as $key => $image) {
+          foreach ($keys as $key => $image) {
               echo "<div class='key' onclick=\"addToOutput('$image', '$key')\"><img src='$image' alt='$key'></div>";
           }
           ?>
@@ -50,7 +50,7 @@
       <div class="button-container">
           <button class="galactic-button" onclick="clearOutput()">Clear</button>
           <button class="galactic-button" onclick="removeLast()">Back</button>
-          <button class="galactic-button" onclick="submitOutput()">Submit</button> <!-- FIXME: Implement functionality later -->
+          <button class="galactic-button" onclick="submitOutput()">Submit</button>
       </div>
 
       <script>
@@ -123,8 +123,25 @@
           }
 
           function submitOutput() {
-              // FIXME: Implement functionality later
-              console.log("Submit functionality will be implemented later.");
+            const output = document.getElementById('output');
+            const images = output.getElementsByTagName('img');
+            const imageFileNames = []; // Array to store filenames
+
+            // Iterate through the images and extract filenames
+            for (let img of images) {
+                const fullPath = img.src;
+                const filename = fullPath.split('/').pop(); // Get just the filename
+                imageFileNames.push(filename); // Add filename to the array
+            }
+
+            // FIXME Change the section below to send this array to a php file so that it can be sent to the database
+            for (let i = 0; i < imageFileNames.length; i++) {
+                const filename = imageFileNames[i]; // Get the current filename
+                alert(filename);
+            }
+
+            // Clear the output after the pattern has been submited
+            clearOutput();
           }
       </script>
 		</div>
