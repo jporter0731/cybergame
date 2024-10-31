@@ -22,10 +22,23 @@
     }
   }
 
+  function get_user_pattern($connection){
+    //SQL Query to get information from the database table
+    $getPatternSQL = "SELECT user_pattern FROM users WHERE user_id=" . USER_ID;
+
+    //Get the passcode infomration
+    $pattern_set = mysqli_query($connection, $getPatternSQL);
+    $passcode_info = mysqli_fetch_assoc($pattern_set);
+
+    $patternID = $passcode_info['user_pattern'];
+
+    return $patternID;
+  }
+
   // SQL Query to show data based on a specific id (used for the view_passcode page)
   function view_passcode_queries($connection){
     //SQL Query to get information from the database table
-    $patternSQL = "SELECT * FROM patterns WHERE pattern_id=". USER_PATTERN_ID;
+    $patternSQL = "SELECT * FROM patterns WHERE pattern_id=". get_user_pattern($connection);
 
     //Get the passcode infomration
     $pattern_set = mysqli_query($connection, $patternSQL);
@@ -47,7 +60,7 @@
 
   // Get the information about the users pattern (total guesses and correct guesses)
   function get_guess_info($connection){
-    $guessesSQL = "SELECT * FROM guesses WHERE correct_pattern=". USER_PATTERN_ID;
+    $guessesSQL = "SELECT * FROM guesses WHERE correct_pattern=". get_user_pattern($connection);
     $correctGuessesSQL = $guessesSQL. " AND correct_guess=1";
 
     //Get the number of guesses on this pattern
