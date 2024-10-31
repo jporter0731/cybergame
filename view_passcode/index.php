@@ -5,11 +5,7 @@
 
 ?>
 <html lang="en">
-    <head>
-        <?php include(PRIVATE_PATH . '/header.php'); ?>
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href=<?php echo CSS_PATH; ?> rel="stylesheet" />
-    </head>
+    <?php include(PRIVATE_PATH . '/header.php'); ?>
     <body>
         <!-- Responsive navbar-->
         <?php include(PRIVATE_PATH . '/nav_bar.php'); ?>

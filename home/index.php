@@ -1,9 +1,6 @@
 <?php require('../private/initialize.php');?>
 <html lang="en">
-<head>
-    <?php include(PRIVATE_PATH . '/header.php'); ?>
-    <!-- Core theme CSS (includes Bootstrap) -->
-    <link href=<?php echo CSS_PATH; ?> rel="stylesheet" />
+<?php include(PRIVATE_PATH . '/header.php'); ?>
 </head>
 <body>
     <!-- Responsive navbar -->
