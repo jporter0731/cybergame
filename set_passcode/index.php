@@ -134,11 +134,21 @@
                 imageFileNames.push(filename); // Add filename to the array
             }
 
-            // FIXME Change the section below to send this array to a php file so that it can be sent to the database
-            for (let i = 0; i < imageFileNames.length; i++) {
-                const filename = imageFileNames[i]; // Get the current filename
-                alert(filename);
-            }
+            // Send the array to a PHP file
+            fetch('set_passcode.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ filenames: imageFileNames }) // Send as JSON
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
 
             // Clear the output after the pattern has been submited
             clearOutput();
