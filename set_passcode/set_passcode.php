@@ -23,10 +23,24 @@ if ($count != 6){
 $sqlInsert .= ")";
 
 // Insert the pattern into the database and then store that result for later
-$result = mysqli_query($db, $sqlInsert);
+$insertResult = mysqli_query($db, $sqlInsert);
+
+// Set the ID of the pattern created to be connected to the user
+$patternID = mysqli_insert_id($db);
+$updateUserSQL = "UPDATE users SET user_pattern = '" . $patternID . "' WHERE user_id = " . USER_ID;
+
+$updateResult = mysqli_query($db, $updateUserSQL);
 
 // Make sure that the value got added correctly to the database
-if ($result) {
+if ($insertResult) {
+    echo json_encode(['status' => 'success', 'data' => $result]);
+} else {
+    echo json_encode(['status' => 'error', 'message' => mysqli_error($db)]);
+}
+
+// Make sure the user pattern got updated properly
+// Make sure that the value got added correctly to the database
+if ($updateResult) {
     echo json_encode(['status' => 'success', 'data' => $result]);
 } else {
     echo json_encode(['status' => 'error', 'message' => mysqli_error($db)]);
