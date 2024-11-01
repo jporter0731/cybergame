@@ -1,23 +1,34 @@
 <?php
-// Get the JSON input
+require('../private/initialize.php');
+
+// Get the information from the json sent from the html code
 $data = json_decode(file_get_contents('php://input'), true);
+$sqlInsert = "INSERT INTO patterns (difficulty, char1, char2, char3, char4, char5, char6) ";
+// FIXME edit the below to assign a pattern a difficulty level
+$difficulty = "Easy";
+$sqlInsert .= "VALUES ('". $difficulty . "'";
 
-// Check if 'filenames' exists
-if (isset($data['filenames']) && is_array($data['filenames'])) {
-    $imageFileNames = $data['filenames'];
+// Add each of the charactes to the end of the SQL statement
+foreach ($data['filenames'] as $key => $value) {
+    $sqlInsert .= ', \'' . $value . '\'';
+}
 
-    // Iterate over the filenames and process them as needed
-    foreach ($imageFileNames as $filename) {
-        $insertPatternSQL = INSERT INTO patterns (difficulty, char1) VALUES ('easy', $filename);
-
-        //Get the passcode infomration
-        $insertInto = mysqli_query($db, $getPatternSQL);
+// Add null values to the end of the sql statment as needed
+$count = count($data['filenames']);
+if ($count != 6){
+    for ($i = 0; $i < (6 - $count); $i++){
+        $sqlInsert .= ', null';
     }
+}
+$sqlInsert .= ")";
 
-    // Return a success response
-    echo json_encode(['status' => 'success', 'message' => 'Filenames processed']);
+// Insert the pattern into the database and then store that result for later
+$result = mysqli_query($db, $sqlInsert);
+
+// Make sure that the value got added correctly to the database
+if ($result) {
+    echo json_encode(['status' => 'success', 'data' => $result]);
 } else {
-    // Return an error response
-    echo json_encode(['status' => 'error', 'message' => 'No filenames received']);
+    echo json_encode(['status' => 'error', 'message' => mysqli_error($db)]);
 }
 ?>

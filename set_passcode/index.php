@@ -143,9 +143,11 @@
                 body: JSON.stringify({ filenames: imageFileNames }) // Send as JSON
             })
             .then(response => response.json())
+            // If the insert was successful add success to console
             .then(data => {
                 console.log('Success:', data);
             })
+            // If the insert was unsuccessful add error to console
             .catch((error) => {
                 console.error('Error:', error);
             });
