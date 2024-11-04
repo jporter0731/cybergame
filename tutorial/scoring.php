@@ -9,7 +9,43 @@
         <div class="container">
             <div class="text-center mt-5">
                 <h1>Scoring</h1>
-                <p class="lead">Welcome to the Keyboard Tutorial! Here, you can familiarize yourself with the controls for Passcode Protector. The keys and their corresponding symbols are mapped below, giving you the tools you need to navigate this interstellar challenge. Use this page to practice and get comfortable with the keyboard before you venture into the game. Sharpen your skills, and prepare to unlock the mysteries of the galaxy!</p>
+                <p class="lead">Welcome, aspiring codebreaker! Understanding the scoring system is crucial for mastering the Galactic Codebreaker game and climbing the leaderboards. Each decision you make while guessing and creating passcodes can significantly impact your score. Here’s a detailed breakdown of how your performance translates into points, with distinct sections for both top guessers and top passcodes.</p>
+                <h2>Galactic Guessmasters</h2>
+                <p class="lead">In this section, we honor the elite players who excel in solving codes. Your score is a reflection of your skills in both accuracy and speed, rewarding those who can crack the toughest challenges efficiently.</p>
+                <div class="card" style="width: 36rem; margin: auto; text-align: center;">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item"><strong>Difficulty Multiplier</strong><br/>
+                        <span style="margin-right: 20px;">Easy: x1 pts</span>
+                        <span style="margin-right: 20px;">Medium: x2 pts</span>
+                        <span>Hard: x4 pts</span>
+                      </li>
+                      <li class="list-group-item"><strong>Correct Guess</strong><br/>
+                        <span>100 pts/guess</span>
+                      </li>
+                      <li class="list-group-item"><strong>Incorrect Guesses</strong><br/>
+                        <span>-5 pts/guess</span>
+                      </li>
+                    </ul>
+                </div>
+                <br/>
+                <h2>Legendary Passcodes</h2>
+                <p class="lead">This section celebrates the most challenging codes crafted by users, showcasing their ingenuity and creativity. The scoring for passcodes is determined by their difficulty level, reflecting the skills required to crack them.</p>
+                <div class="card" style="width: 36rem; margin: auto; text-align: center;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Difficulty Base Score</strong><br/>
+                          <span style="margin-right: 20px;">Easy: 25 pts</span>
+                          <span style="margin-right: 20px;">Medium: 50 pts</span>
+                          <span>Hard: 100 pts</span>
+                        </li>
+                        <li class="list-group-item"><strong>Correct Guesses</strong><br/>
+                          <span>-25 pts/guess</span>
+                        </li>
+                        <li class="list-group-item"><strong>Total Guesses</strong><br/>
+                          <span>5 pts/guess</span>
+                        </li>
+                    </ul>
+                </div>
+                <br/>
             </div>
         </div>
         <div class="button-container">

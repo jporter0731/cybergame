@@ -23,7 +23,7 @@ $previous_guess_set = mysqli_query($db, $previousGuessSQL);
           <?php }elseif (pattern_solved($db, $passcodeID) > 0){ ?>
             <div class="text-center mt-5">
                 <h1>Congratulations! You Have Cracked Pascode <?php echo $passcodeID; ?></h1>
-                <p class="lead"><p class="lead">It seems you've successfully solved the pattern! No worries about landing here by mistake. To continue your adventure, please use the dropdown menu above to navigate back to the "Guess a Passcode" page. Your journey awaits, and we’re excited to see where your next challenge takes you!</p></p>
+                <p class="lead"><p class="lead">It seems you've already successfully solved this passcode! No worries about landing here by mistake. To continue your adventure, please use the dropdown menu above to navigate back to the "Guess a Passcode" page. Your journey awaits, and we’re excited to see where your next challenge takes you!</p>
             </div>
           <?php }else{ ?>
             <div class="text-center mt-5">
@@ -43,11 +43,17 @@ $previous_guess_set = mysqli_query($db, $previousGuessSQL);
 						<tr style="text-align: center;">
               <?php $count = 0; /*Set the count variable for the number of guesses made*/
               while($pattern = mysqli_fetch_assoc($previous_guess_set)){
+                  // Increment the count and get the guess id pattern
                   $count++;
                   $guessID = $pattern['pattern_guessed'];
                   $charList = view_passcode($db, $guessID);
+                  // FIXME: Add a way to get the correct passcode here
               ?>
+              <!--This is the first column that shows the guess count-->
 							<th scope="row" style="color: #dddddd; text-align: center; vertical-align: middle;"><?php echo $count; ?></th>
+              <!--FIXME: Cycle through pattern to see if there are any correct values-->
+              <!--FIXME: Cycle through each value and see if the character is in the passcode-->
+              <!--FIXME: Currently this section prints out the passcode with all yellow backgrounds-->
               <?php foreach ($charList as $key => $value){
                     $resourceLink = RESOURCE_PATH . $value; ?>
                     <td class="coloryl" style="text-align: center;">
