@@ -29,7 +29,7 @@
 			</div>
 			<!--Put current guess here-->
 			<!--put symbol keyboard here-->
-      <?php include(PRIVATE_PATH . '/keyboard.php'); ?>
+      <?php include('keyboard.php'); ?>
 		</div>
     </body>
 <?php include(PRIVATE_PATH . '/footer.php'); ?>
