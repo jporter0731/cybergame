@@ -36,7 +36,7 @@
 <div class="button-container">
     <button class="galactic-button" onclick="clearOutput()">Clear</button>
     <button class="galactic-button" onclick="removeLast()">Back</button>
-    <button class="galactic-button" onclick="submitOutput()">Submit</button> <!-- FIXME: Implement functionality later -->
+    <button class="galactic-button" onclick="submitOutput()">Submit</button>
 </div>
 
 <script>
@@ -94,7 +94,7 @@
             clearOutput(); // Call clearOutput function on Escape
         }
         if (event.key === 'Enter') {
-            submitOutput(); // Call clearOutput function on Escape
+            submitOutput(); // Call submitOutput function on Enter
         }
     });
 

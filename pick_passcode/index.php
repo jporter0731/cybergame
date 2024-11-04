@@ -51,9 +51,11 @@
                                     <li class="list-group-item">Guess Count: <?php echo $passcode['guess_count']; ?></li>
                                 </ul>
                                 <?php
-                                  if($passcode['status'] !== 'Complete'){ ?>
+                                  if($passcode['status'] !== 'Complete'){
+                                    $passcodeURL = url_for('guess_page/index.php');
+                                    $passcodeURL .= "?passcode_id=" . $passcode['id'];?>
                                     <div class="card-footer">
-                                    	<a href= <?php echo url_for('guess_page'); ?> class="card-link">View Passcode</a>
+                                    	<a href= <?php echo $passcodeURL; ?> class="card-link">View Passcode</a>
                                     </div>
                                 <?php  }
                                 ?>
@@ -64,6 +66,12 @@
                 </div>
             </div>
         </div>
+        <script>
+            function sendPasscode(passcodeID) {
+              // Save the passcode ID
+              sessionStorage.setItem('passcode_id', passcodeID);
+            }
+        </script>
     </div>
 </body>
 <?php include(PRIVATE_PATH . '/footer.php'); ?>
