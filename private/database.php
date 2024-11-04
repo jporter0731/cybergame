@@ -58,6 +58,26 @@
     return $passcode_info;
   }
 
+  // SQL Query to show data based on a specific id (used for the view_passcode page)
+  function view_passcode($connection, $patternID){
+    //SQL Query to get information from the database table
+    $patternSQL = "SELECT * FROM patterns WHERE pattern_id=". $patternID;
+
+    //Get the passcode infomration
+    $pattern_set = mysqli_query($connection, $patternSQL);
+    $passcode_info = mysqli_fetch_assoc($pattern_set);
+
+    //remove the passcode id and difficulty from the list
+    unset($passcode_info['pattern_id']);
+    unset($passcode_info['difficulty']);
+
+    foreach ($myPatternInfo as $key => $value) {
+      $passcode_info[$key] = $value;
+    }
+
+    return $passcode_info;
+  }
+
   // Get the information about the users pattern (total guesses and correct guesses)
   function get_guess_info($connection){
     $guessesSQL = "SELECT * FROM guesses WHERE correct_pattern=". get_user_pattern($connection);

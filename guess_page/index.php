@@ -2,6 +2,9 @@
 
 $passcodeID = isset($_GET['passcode_id']) ? $_GET['passcode_id'] : null;
 
+$previousGuessSQL = "SELECT * FROM guesses WHERE correct_pattern = " . $passcodeID . " AND user_guessing = " . USER_ID;
+$previous_guess_set = mysqli_query($db, $previousGuessSQL);
+
 ?>
 
 <html lang="en">
@@ -32,9 +35,23 @@ $passcodeID = isset($_GET['passcode_id']) ? $_GET['passcode_id'] : null;
 					</thead>
 					<tbody>
 						<tr style="text-align: center;">
-							<th scope="row" style="color: #dddddd;">1</th>
-              <!--Previous Guesses here-->
+              <?php $count = 0; /*Set the count variable for the number of guesses made*/
+              while($pattern = mysqli_fetch_assoc($previous_guess_set)){
+                  $count++;
+                  $guessID = $pattern['pattern_guessed'];
+                  $charList = view_passcode($db, $guessID);
+              ?>
+							<th scope="row" style="color: #dddddd; text-align: center; vertical-align: middle;"><?php echo $count; ?></th>
+              <?php foreach ($charList as $key => $value){
+                    $resourceLink = RESOURCE_PATH . $value; ?>
+                    <td class="coloryl" style="text-align: center;">
+      								<button class="btn btn-default">
+      									<img src=<?php echo $resourceLink; ?> width="80" />
+      								</button>
+      							</td>
+              <?php } ?>
 						</tr>
+            <?php } ?>
 					</tbody>
 				</table>
 			</div>

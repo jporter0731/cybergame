@@ -1,6 +1,5 @@
 <?php
 require('../private/initialize.php');
-require('example.php');
 
 // Example Data
 $yellowCharacters = [

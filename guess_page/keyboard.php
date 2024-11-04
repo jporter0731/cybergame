@@ -38,6 +38,9 @@
     <button class="galactic-button" onclick="removeLast()">Back</button>
     <button class="galactic-button" onclick="submitOutput()">Submit</button>
 </div>
+<div class="button-container">
+    <button class="galactic-button" onclick="window.location.href='<?php echo url_for('pick_passcode'); ?>';">Back to Passcode List</button>
+</div>
 
 <script>
     // Create a mapping of keys to image sources
