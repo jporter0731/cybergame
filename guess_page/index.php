@@ -2,7 +2,7 @@
 
 $passcodeID = isset($_GET['passcode_id']) ? $_GET['passcode_id'] : null;
 
-$previousGuessSQL = "SELECT * FROM guesses WHERE correct_pattern = " . $passcodeID . " AND user_guessing = " . USER_ID;
+$previousGuessSQL = "SELECT * FROM guesses WHERE correct_pattern = " . $passcodeID . " AND user_guessing = " . USER_ID . " ORDER BY guess_time ASC";
 $previous_guess_set = mysqli_query($db, $previousGuessSQL);
 
 ?>
@@ -14,10 +14,16 @@ $previous_guess_set = mysqli_query($db, $previousGuessSQL);
         <?php include(PRIVATE_PATH . '/nav_bar.php'); ?>
         <!-- Page content-->
         <div class="container">
-            <?php if (isset($passcodeID)) { ?>
+            <!--The below line checks if the passcode is set and then makes sure that it exits in the database-->
+            <?php if (isset($passcodeID) && (pattern_exists($db, $passcodeID) > 0) && (pattern_solved($db, $passcodeID) === 0)) { ?>
             <div class="text-center mt-5">
                 <h1>You Are Currently Trying to Crack Pascode <?php echo $passcodeID; ?></h1>
                 <p class="lead">Make your guess using the character cards below. Remember, each secret code consists of 1 to 6 symbols, and duplicates are allowed. Harness your skills and intuition as you work to unlock this cosmic mystery. For added convenience, you can use keyboard shortcuts to make your guesses. Check out the keyboard tutorial for guidance on mastering your inputs. Good luck, codebreaker! Your journey through the stars continues!</p>
+            </div>
+          <?php }elseif (pattern_solved($db, $passcodeID) > 0){ ?>
+            <div class="text-center mt-5">
+                <h1>Congratulations! You Have Cracked Pascode <?php echo $passcodeID; ?></h1>
+                <p class="lead"><p class="lead">It seems you've successfully solved the pattern! No worries about landing here by mistake. To continue your adventure, please use the dropdown menu above to navigate back to the "Guess a Passcode" page. Your journey awaits, and we’re excited to see where your next challenge takes you!</p></p>
             </div>
           <?php }else{ ?>
             <div class="text-center mt-5">
