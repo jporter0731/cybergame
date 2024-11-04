@@ -40,7 +40,8 @@
                 </div>
 
                 <div class="row gy-3 justify-content-center">
-                    <?php foreach ($passcodes as $passcode): ?>
+                    <?php foreach ($passcodes as $passcode):
+                        if ($passcode['id'] != get_user_pattern($db)){?>
                         <div class="col-md-3 d-flex justify-content-center">
                             <div class="card" style="width: 18rem;">
                                 <ul class="list-group list-group-flush">
@@ -58,7 +59,8 @@
                                 ?>
                             </div>
                         </div>
-                    <?php endforeach; ?>
+                      <?php }
+                      endforeach; ?>
                 </div>
             </div>
         </div>
