@@ -5,7 +5,8 @@ require('../private/initialize.php');
 $data = json_decode(file_get_contents('php://input'), true);
 $sqlInsert = "INSERT INTO patterns (difficulty, char1, char2, char3, char4, char5, char6) ";
 // FIXME edit the below to assign a pattern a difficulty level
-$difficulty = "Easy";
+
+$difficulty = passcode_difficulty($data);
 $sqlInsert .= "VALUES ('". $difficulty . "'";
 
 // Add each of the charactes to the end of the SQL statement

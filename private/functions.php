@@ -10,8 +10,39 @@ function url_for($script_path) {
 }
 
 // Get the passcode difficulty
-function passcode_difficulty(){
+function passcode_difficulty($data){
+  $difficulty;
+  $score = 0;
+  // Account for length in difficulty
+  $count = count($data['filenames']);
+  if ($count < 3){
+    $difficulty = "Easy";
+    return $difficulty;
+  }elseif ($count < 5) {
+    $score += 2;
+  }else{
+    $score += 5;
+  }
 
+  //Check the count of unique letters
+  $uniqueCharacters = []; // Initialize an empty array to track unique characters
+  $uniqueFilenamesCount = 0;
+  // Loop through each filename in $data['filenames']
+  foreach ($data['filenames'] as $key => $value) {
+      $uniqueCharacters[$value] = 1;
+  }
+  $uniqueCharactersCount = count($uniqueCharacters);
+  // Calculate the passcode difficulty
+  $score *= $uniqueCharactersCount;
+  // Get difficulty from the score generated
+  if ($score < 5){
+    $difficulty = "Easy";
+  }elseif ($score < 11) {
+    $difficulty = "Medium";
+  }else{
+    $difficulty .= "Hard";
+  }
+  return $difficulty;
 }
 
 // Creates the character button used for displaying patterns (on the view_passcode and guess_page)

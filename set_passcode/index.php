@@ -107,6 +107,9 @@
               if (event.key === 'Escape') {
                   clearOutput(); // Call clearOutput function on Escape
               }
+              if (event.key === 'Enter') {
+                  submitOutput(); // Call clearOutput function on Enter
+              }
           });
 
           function removeLast() {
