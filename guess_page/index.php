@@ -62,7 +62,6 @@ $previous_guess_set = mysqli_query($db, $previousGuessSQL);
                     <td class=<?php echo $colorList[$key]; ?> style="text-align: center;">
       								<button class="btn btn-default">
       									<img src=<?php echo $resourceLink; ?> width="80" />
-                        <p><?php echo $colorList[$key]; ?></p>
       								</button>
       							</td>
               <?php } ?>
