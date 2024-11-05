@@ -1,9 +1,11 @@
 <?php require('../private/initialize.php');
+require ('compare_logic.php');
 
 $passcodeID = isset($_GET['passcode_id']) ? $_GET['passcode_id'] : null;
 
 $previousGuessSQL = "SELECT * FROM guesses WHERE correct_pattern = " . $passcodeID . " AND user_guessing = " . USER_ID . " ORDER BY guess_time ASC";
 $previous_guess_set = mysqli_query($db, $previousGuessSQL);
+
 
 ?>
 
@@ -46,8 +48,9 @@ $previous_guess_set = mysqli_query($db, $previousGuessSQL);
                   // Increment the count and get the guess id pattern
                   $count++;
                   $guessID = $pattern['pattern_guessed'];
+                  $correctGuess = $pattern['correct_pattern'];
                   $charList = view_passcode($db, $guessID);
-                  // FIXME: Add a way to get the correct passcode here
+                  $colorList = compare_patterns($db, $charList, $correctGuess);
               ?>
               <!--This is the first column that shows the guess count-->
 							<th scope="row" style="color: #dddddd; text-align: center; vertical-align: middle;"><?php echo $count; ?></th>
@@ -56,9 +59,10 @@ $previous_guess_set = mysqli_query($db, $previousGuessSQL);
               <!--FIXME: Currently this section prints out the passcode with all yellow backgrounds-->
               <?php foreach ($charList as $key => $value){
                     $resourceLink = RESOURCE_PATH . $value; ?>
-                    <td class="coloryl" style="text-align: center;">
+                    <td class=<?php echo $colorList[$key]; ?> style="text-align: center;">
       								<button class="btn btn-default">
       									<img src=<?php echo $resourceLink; ?> width="80" />
+                        <p><?php echo $colorList[$key]; ?></p>
       								</button>
       							</td>
               <?php } ?>
@@ -67,7 +71,7 @@ $previous_guess_set = mysqli_query($db, $previousGuessSQL);
 					</tbody>
 				</table>
 			</div>
-      <?php if (isset($passcodeID)) {
+      <?php if (isset($passcodeID) && (pattern_solved($db, $passcodeID) === 0)) {
           include('keyboard.php');
         } ?>
 		</div>
