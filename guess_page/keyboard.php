@@ -125,6 +125,7 @@
         }
 
         const imageFileNames = []; // Array to store filenames
+        imageFileNames.push(<?php echo json_encode($passcodeID); ?>);
 
         // Iterate through the images and extract filenames
         for (let img of images) {

@@ -9,6 +9,10 @@ $sqlInsert = "INSERT INTO patterns (difficulty, char1, char2, char3, char4, char
 $difficulty = passcode_difficulty($data);
 $sqlInsert .= "VALUES (null";
 
+//Get the pattern ID and move the array down one to avoid using that value by accident
+$correctID = reset($data['filenames']);
+array_shift($data['filenames']);
+
 // Add each of the charactes to the end of the SQL statement
 foreach ($data['filenames'] as $key => $value) {
     $sqlInsert .= ', \'' . $value . '\'';
@@ -28,7 +32,7 @@ $insertResult = mysqli_query($db, $sqlInsert);
 
 // Set the ID of the pattern created to be connected to the user
 $patternID = mysqli_insert_id($db);
-$correctID = 1234;
+//$correctID = 1234;
 $correctGuess = correct_guess($db, $patternID, $correctID);
 $insertGuessSQL = "INSERT INTO guesses (user_guessing, pattern_guessed, correct_pattern, correct_guess) ";
 $insertGuessSQL .= "VALUES ('" . USER_ID . "', '" . $patternID . "', '" . $correctID . "', '" . $correctGuess . "')";
