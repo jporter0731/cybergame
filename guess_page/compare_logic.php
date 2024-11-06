@@ -39,7 +39,7 @@ function compare_patterns($connection, $guessList, $correctID){
 }
 
 function correct_guess($connection, $guessID, $correctID){
-    $guessList = view_passcode($connection, $correctID);
+    $guessList = view_passcode($connection, $guessID);
     $correctList = view_passcode($connection, $correctID);
 
     //Check for correct characters in correct spots

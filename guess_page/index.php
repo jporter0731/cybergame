@@ -25,7 +25,7 @@ $previous_guess_set = mysqli_query($db, $previousGuessSQL);
           <?php }elseif (pattern_solved($db, $passcodeID) > 0){ ?>
             <div class="text-center mt-5">
                 <h1>Congratulations! You Have Cracked Pascode <?php echo $passcodeID; ?></h1>
-                <p class="lead"><p class="lead">It seems you've already successfully solved this passcode! No worries about landing here by mistake. To continue your adventure, please use the dropdown menu above to navigate back to the "Guess a Passcode" page. Your journey awaits, and we’re excited to see where your next challenge takes you!</p>
+                <p class="lead"><p class="lead">To continue your adventure, please use the dropdown menu above to navigate back to the "Guess a Passcode" page. Your journey awaits, and we’re excited to see where your next challenge takes you!</p>
             </div>
           <?php }else{ ?>
             <div class="text-center mt-5">
@@ -56,7 +56,11 @@ $previous_guess_set = mysqli_query($db, $previousGuessSQL);
 							<th scope="row" style="color: #dddddd; text-align: center; vertical-align: middle;"><?php echo $count; ?></th>
               <!--Cycle through pattern to see if there are any correct values and assign proper backgrounds-->
               <?php foreach ($charList as $key => $value){
-                    $resourceLink = RESOURCE_PATH . $value; ?>
+                    if(isset($value)){
+                        $resourceLink = RESOURCE_PATH . $value;
+                    }else{
+                        $resourceLink = RESOURCE_PATH . "empty.png";
+                    }?>
                     <td class=<?php echo $colorList[$key]; ?> style="text-align: center;">
       								<button class="btn btn-default">
       									<img src=<?php echo $resourceLink; ?> width="80" />
