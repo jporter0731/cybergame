@@ -75,6 +75,9 @@ $previous_guess_set = mysqli_query($db, $previousGuessSQL);
       <?php if (isset($passcodeID) && (pattern_solved($db, $passcodeID) === 0)) {
           include('keyboard.php');
         } ?>
+        <div class="button-container">
+            <button class="galactic-button" onclick="window.location.href='<?php echo url_for('pick_passcode'); ?>';">Back to Passcode List</button>
+        </div>
 		</div>
     </body>
 <?php include(PRIVATE_PATH . '/footer.php'); ?>
