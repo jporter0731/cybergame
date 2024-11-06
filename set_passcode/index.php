@@ -80,11 +80,13 @@
               const output = document.getElementById('output');
               const images = output.getElementsByTagName('img');
 
+              //Verrify that the character length is not more than 6 before continuing
               if (images.length >= 6) {
-                  alert("You can only enter up to 6 letters."); // Standard alert
+                  alert("You can only enter up to 6 symbols."); // Standard alert
                   return; // Exit if the limit is reached
               }
 
+              //Add the character to the list
               const img = document.createElement('img');
               img.src = imageSrc;
               img.className = 'output-image';
@@ -112,6 +114,7 @@
               }
           });
 
+          //Function to remove the chatacter from the list
           function removeLast() {
               const output = document.getElementById('output');
               const images = output.getElementsByTagName('img');
@@ -120,14 +123,23 @@
               }
           }
 
+          //Function to clear the character list
           function clearOutput() {
               const output = document.getElementById('output');
               output.innerHTML = ''; // Clear all images
           }
 
+          //Function that will submit the users passcode once entered
           function submitOutput() {
             const output = document.getElementById('output');
             const images = output.getElementsByTagName('img');
+
+            //Verify that the passcode is not length 0 before continuing
+            if (images.length === 0) {
+                alert("Your passcode must be at least 1 symbol long."); // Standard alert
+                return; // Exit if the limit is reached
+            }
+
             const imageFileNames = []; // Array to store filenames
 
             // Iterate through the images and extract filenames

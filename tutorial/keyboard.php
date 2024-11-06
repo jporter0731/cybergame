@@ -86,7 +86,7 @@
               const images = output.getElementsByTagName('img');
 
               if (images.length >= 6) {
-                  alert("You can only enter up to 6 letters."); // Standard alert
+                  alert("You can only enter up to 6 symbols."); // Standard alert
                   return; // Exit if the limit is reached
               }
 
@@ -113,7 +113,7 @@
                   clearOutput(); // Call clearOutput function on Escape
               }
               if(event.key === 'Enter'){
-                  submitOutput();
+                  submitOutput(); // Call submitOutput function on Enter
               }
           });
 
@@ -131,6 +131,14 @@
           }
 
           function submitOutput() {
+              // Verify that there is at least one character entered before submitting request
+              const output = document.getElementById('output');
+              const images = output.getElementsByTagName('img');
+
+              if (images.length === 0) {
+                  alert("Your passcode must be at least 1 symbol long.");
+                  return; // Exit if there are no characters entered
+              }
               alert("Your Passcode Has Been Submited.")
               clearOutput();
           }

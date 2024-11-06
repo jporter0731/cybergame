@@ -70,7 +70,7 @@
         const images = output.getElementsByTagName('img');
 
         if (images.length >= 6) {
-            alert("You can only enter up to 6 letters."); // Standard alert
+            alert("You can only enter up to 6 symbols."); // Standard alert
             return; // Exit if the limit is reached
         }
 
@@ -115,6 +115,13 @@
     }
 
     function submitOutput() {
+        const output = document.getElementById('output');
+        const images = output.getElementsByTagName('img');
+
+        if (images.length === 0) {
+            alert("Your passcode guess must be at least 1 symbol long."); // Standard alert
+            return; // Exit if the limit is reached
+        }
         alert("HERE");
         // FIXME: Implement functionality later
         console.log("Submit functionality will be implemented later.");
