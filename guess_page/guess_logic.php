@@ -6,7 +6,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 $sqlInsert = "INSERT INTO patterns (difficulty, char1, char2, char3, char4, char5, char6) ";
 //Add an assign difficulty to a pattern
 $difficulty = passcode_difficulty($data);
-$sqlInsert .= "VALUES ('". $difficulty . "'";
+$sqlInsert .= "VALUES (null";
 
 // Add each of the charactes to the end of the SQL statement
 foreach ($data['filenames'] as $key => $value) {
@@ -27,13 +27,16 @@ $insertResult = mysqli_query($db, $sqlInsert);
 
 // Set the ID of the pattern created to be connected to the user
 $patternID = mysqli_insert_id($db);
-$updateUserSQL = "UPDATE users SET user_pattern = '" . $patternID . "' WHERE user_id = " . USER_ID;
+$correctID = 1234;
+$correctGuess = 0;
+$insertGuessSQL = "INSERT INTO guesses (user_guessing, pattern_guessed, correct_pattern, correct_guess) ";
+$insertGuessSQL .= "VALUES ('" . USER_ID . "', '" . $patternID . "', '" . $correctID . "', '" . $correctGuess . "')";
 
-$updateResult = mysqli_query($db, $updateUserSQL);
+$insertPatternResult = mysqli_query($db, $insertGuessSQL);
 
 // Make sure that the value got added correctly to the database and updated properly
-if ($insertResult && $updateResult) {
-    echo json_encode(['status' => 'success', 'data' => ('Insert Result: ' . $insertResult . '  Update Result: ' . $updateResult)]);
+if ($insertResult && $insertPatternResult) {
+    echo json_encode(['status' => 'success', 'data' => ('Insert Result: ' . $insertResult . '  Update Result: ' . $insertPatternResult)]);
 } else{
     echo json_encode(['status' => 'error', 'message' => mysqli_error($db)]);
 }

@@ -118,12 +118,44 @@
         const output = document.getElementById('output');
         const images = output.getElementsByTagName('img');
 
+        //Verify that the passcode is not length 0 before continuing
         if (images.length === 0) {
-            alert("Your passcode guess must be at least 1 symbol long."); // Standard alert
+            alert("Your passcode must be at least 1 symbol long."); // Standard alert
             return; // Exit if the limit is reached
         }
-        alert("HERE");
-        // FIXME: Implement functionality later
-        console.log("Submit functionality will be implemented later.");
+
+        const imageFileNames = []; // Array to store filenames
+
+        // Iterate through the images and extract filenames
+        for (let img of images) {
+            const fullPath = img.src;
+            const filename = fullPath.split('/').pop(); // Get just the filename
+            imageFileNames.push(filename); // Add filename to the array
+        }
+
+        // Send the array to a PHP file
+        fetch('guess_logic.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ filenames: imageFileNames }) // Send as JSON
+        })
+        .then(response => response.json())
+        // If the insert was successful add success to console
+        .then(data => {
+            console.log('Success:', data);
+        })
+        // If the insert was unsuccessful add error to console
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+        // Clear the output after the pattern has been submited
+        clearOutput();
+        // Wait for 1 second (1000 milliseconds) before reloading the page
+        setTimeout(function() {
+            location.reload();  // Refresh the page
+        }, 1000);
     }
 </script>

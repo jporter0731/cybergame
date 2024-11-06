@@ -54,9 +54,7 @@ $previous_guess_set = mysqli_query($db, $previousGuessSQL);
               ?>
               <!--This is the first column that shows the guess count-->
 							<th scope="row" style="color: #dddddd; text-align: center; vertical-align: middle;"><?php echo $count; ?></th>
-              <!--FIXME: Cycle through pattern to see if there are any correct values-->
-              <!--FIXME: Cycle through each value and see if the character is in the passcode-->
-              <!--FIXME: Currently this section prints out the passcode with all yellow backgrounds-->
+              <!--Cycle through pattern to see if there are any correct values and assign proper backgrounds-->
               <?php foreach ($charList as $key => $value){
                     $resourceLink = RESOURCE_PATH . $value; ?>
                     <td class=<?php echo $colorList[$key]; ?> style="text-align: center;">

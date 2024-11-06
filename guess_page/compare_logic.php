@@ -38,4 +38,24 @@ function compare_patterns($connection, $guessList, $correctID){
   return $guessColors;
 }
 
+function correct_guess($connection, $guessID, $correctID){
+    $guessList = view_passcode($connection, $correctID);
+    $correctList = view_passcode($connection, $correctID);
+
+    //Check for correct characters in correct spots
+    foreach ($guessList as $key => $value) {
+      if($correctList[$key] === $value){
+          unset($correctList[$key]);
+      }
+    }
+
+    //Check if the list it 0, if it is, the pattern was guessed correctly otherwise is wasnt
+    //Return the result accordingly
+    if (count($correctList) === 0){
+      return 1;
+    }else{
+      return 0;
+    }
+}
+
 ?>
