@@ -1,6 +1,35 @@
+<style>
+    .spinner {
+        border: 15px solid #f3f3f3;
+        border-top: 15px solid #3498db;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        animation: spin 1s linear infinite;
+    }
+
+    #loadingIndicator {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10000;
+        display: none;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+
 <!-- The below code was created using the assistance of ChatGPT 4.0. All code was properly tested and works as intended -->
 <div class="current-guess">Current Guess</div>
 <div id="output"></div>
+
+<div id="loadingIndicator" style="display:blcok;">
+    <div class="spinner"></div>
+</div>
 
 <div class="keyboard">
     <?php
@@ -151,9 +180,23 @@
 
         // Clear the output after the pattern has been submited
         clearOutput();
-        // Wait for 1 second (1000 milliseconds) before reloading the page
+        // Show the loading indicator
+        document.getElementById('loadingIndicator').style.display = 'block';
+        // Wait for between 1 and 3.5 seconds before reloading the page
+        const randomNumber = getRandomNumber();
         setTimeout(function() {
             location.reload();  // Refresh the page
-        }, 1000);
+        }, randomNumber);
+
+        // Generate a random number between 1000 and 3500 as multiples of 100
+        function getRandomNumber() {
+            // Generate a random integer between 10 and 35
+            const min = 10;
+            const max = 25;
+            const randomInt = Math.floor(Math.random() * (max - min + 1)) + min;
+
+            // Multiply the random integer by 100 to get a multiple of 100
+            return randomInt * 100;
+        }
     }
 </script>
