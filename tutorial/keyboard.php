@@ -12,6 +12,7 @@
                 <p class="lead">Welcome to the Keyboard Tutorial! Here, you can familiarize yourself with the controls for Galactic Codebreaker. The keys and their corresponding symbols are mapped below, giving you the tools you need to navigate this interstellar challenge. Sharpen your skills, and prepare to unlock the mysteries of the galaxy!<br/><br/>Use the interactive keyboard below to practice and get comfortable with the controls before you dive into the game.</p>
             </div>
 			<!-- The below code was created using the assistance of ChatGPT 4.0. All code was properly tested and works as intended -->
+      <div id="snackbar-container"></div>
       <div class="keyboard">
           <?php
           // Define an array of key images (placeholders for 18 keys)
@@ -81,12 +82,37 @@
             'N': '<?php echo RESOURCE_PATH; ?>character18.png',
           };
 
+          function snackbar(type, msg, time){
+              const snackbarContainer = document.getElementById('snackbar-container');
+              const para = document.createElement('P');
+              para.classList.add('snackbar');
+              para.innerHTML = `${msg} <span> &times </span>`;
+
+              if(type === 'error'){
+                  para.classList.add('error');
+              }
+              else if(type ==='success'){
+                  para.classList.add('success');
+              }
+              else if(type ==='warning'){
+                  para.classList.add('warning');
+              }
+
+              snackbarContainer.appendChild(para);
+              para.classList.add('fadeout');
+
+              setTimeout(()=>{
+                      snackbarContainer.removeChild(para)
+              }, time)
+
+          }
+
           function addToOutput(imageSrc, key) {
               const output = document.getElementById('output');
               const images = output.getElementsByTagName('img');
 
               if (images.length >= 6) {
-                  alert("You can only enter up to 6 symbols."); // Standard alert
+                  snackbar('warning', 'Your passcode guess can\'t be more than 6 characters long.', 5000);
                   return; // Exit if the limit is reached
               }
 
@@ -136,10 +162,10 @@
               const images = output.getElementsByTagName('img');
 
               if (images.length === 0) {
-                  alert("Your passcode must be at least 1 symbol long.");
+                  snackbar('error', 'Your passcode guess must be at least 1 character long.', 5000);
                   return; // Exit if there are no characters entered
               }
-              alert("Your Passcode Has Been Submited.")
+              snackbar('success', 'Your pattern would be submitted here.', 10000);
               clearOutput();
           }
       </script>

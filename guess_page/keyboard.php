@@ -91,12 +91,37 @@
       'N': '<?php echo RESOURCE_PATH; ?>character18.png',
     };
 
+    function snackbar(type, msg, time){
+        const snackbarContainer = document.getElementById('snackbar-container');
+        const para = document.createElement('P');
+        para.classList.add('snackbar');
+        para.innerHTML = `${msg} <span> &times </span>`;
+
+        if(type === 'error'){
+            para.classList.add('error');
+        }
+        else if(type ==='success'){
+            para.classList.add('success');
+        }
+        else if(type ==='warning'){
+            para.classList.add('warning');
+        }
+
+        snackbarContainer.appendChild(para);
+        para.classList.add('fadeout');
+
+        setTimeout(()=>{
+                snackbarContainer.removeChild(para)
+        }, time)
+
+    }
+
     function addToOutput(imageSrc, key) {
         const output = document.getElementById('output');
         const images = output.getElementsByTagName('img');
 
         if (images.length >= 6) {
-            alert("You can only enter up to 6 symbols."); // Standard alert
+            snackbar('warning', 'Your passcode guess can\'t be more than 6 characters long.', 5000);
             return; // Exit if the limit is reached
         }
 
@@ -146,7 +171,7 @@
 
         //Verify that the passcode is not length 0 before continuing
         if (images.length === 0) {
-            alert("Your passcode must be at least 1 symbol long."); // Standard alert
+            snackbar('error', 'Your passcode guess must be at least 1 character long.', 5000);
             return; // Exit if the limit is reached
         }
 

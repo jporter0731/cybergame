@@ -36,7 +36,8 @@ $previous_guess_set = mysqli_query($db, $previousGuessSQL);
           if (isset($passcodeID) && (pattern_solved($db, $passcodeID) === 0)) {
               include('keyboard.php');
             } ?>
-			<div class="table-responsive">
+      <div id="snackbar-container"></div>
+      <div class="table-responsive">
 				<table class="table caption-top">
 					<caption>Previous Guesses</caption>
 					<thead>
