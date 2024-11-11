@@ -2,7 +2,7 @@
 require('../private/initialize.php');
 
 // Example Data
-$yellowCharacters = [
+$exampleCharacters = [
     ['image' => '../resources/character1.png', 'alt' => 'Character 1'],
     ['image' => '../resources/character8.png', 'alt' => 'Character 8'],
     ['image' => '../resources/character12.png', 'alt' => 'Character 12'],
@@ -40,7 +40,7 @@ $fullExampleCharacters2 = [
             </div>
             <div class="text-center mt-5">
                 <h2>Your Goal</h2>
-                <p class="lead">Goal description goes here.</p>
+                <p class="lead">As a Passcode Protector, your objective is to crack the passcodes as quickly and efficiently as possible. Each time you make a guess, you're getting closer to unlocking the correct passcode. However, the key to maximizing your score lies in making as few guesses as possible. The fewer the guesses, the higher your score — so think carefully and strategize your next move to solve the passcode with precision and speed.</p>
             </div>
             <div class="text-center mt-5">
                 <h2>Enter Your Guess</h2>
@@ -50,11 +50,13 @@ $fullExampleCharacters2 = [
                 <h2>Receive Feedback on Your Guess</h2>
                 <p class="lead">Once your guess is submitted, the game will provide immediate feedback to guide you on your journey:<br/></p>
                 <p class="lead">Red Background: This signifies that the symbol you guessed is not included in the passcode at all. Discard this symbol from your future guesses!<br/></p>
-                <?php echo createCharacterTableOneColor($yellowCharacters, "colorrd"); ?>
+                <?php echo createCharacterTableOneColor($exampleCharacters, "colorrd"); ?>
                 <p class="lead">Yellow Background: A yellow background indicates that the symbol is present in the passcode, but it’s in the wrong position. This means you're on the right track, but adjustments are needed.<br/></p>
-                <?php echo createCharacterTableOneColor($yellowCharacters, "coloryl"); ?>
+                <?php echo createCharacterTableOneColor($exampleCharacters, "coloryl"); ?>
+                <p class="lead">Yellow & Green Background: A yellow/green background means the symbol appears multiple times in the passcode. It is correctly placed in one position, but it also appears elsewhere in the passcode. Keep searching — it will be in another position as well.<br/></p>
+                <?php echo createCharacterTableOneColor($exampleCharacters, "colorgy"); ?>
                 <p class="lead">Green Background: A green background means that the symbol is correctly placed within the passcode! You’re getting closer to cracking the code!<br/></p>
-                <?php echo createCharacterTableOneColor($yellowCharacters, "colorgn"); ?>
+                <?php echo createCharacterTableOneColor($exampleCharacters, "colorgn"); ?>
                 <p class="lead">A complete guess will look something like this.</p>
                 <?php echo createCharacterTable($fullExampleCharacters); ?>
                 </p>
