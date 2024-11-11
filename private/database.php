@@ -53,6 +53,18 @@ function pattern_exists($connection, $patternID){
     return $count;
 }
 
+// Check whether the pattern id exists in the Database
+function user_exists($connection, $userName){
+    //SQL Query to get the list of patterns with a specific id
+    $patternSQL = "SELECT * FROM users WHERE uname = " . $userName;
+
+    //Get the passcode infomration
+    $pattern_set = mysqli_query($connection, $patternSQL);
+    $count = mysqli_num_rows($pattern_set);
+
+    return $count;
+}
+
 // Get the pattern for the user that is logged in
 function get_user_pattern($connection){
   //SQL Query to get information from the database table
