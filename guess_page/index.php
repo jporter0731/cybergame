@@ -3,7 +3,7 @@ require ('compare_logic.php');
 
 $passcodeID = isset($_GET['passcode_id']) ? $_GET['passcode_id'] : null;
 
-$previousGuessSQL = "SELECT * FROM guesses WHERE correct_pattern = " . $passcodeID . " AND user_guessing = " . USER_ID . " ORDER BY guess_time ASC";
+$previousGuessSQL = "SELECT * FROM guesses WHERE correct_pattern = " . $passcodeID . " AND user_guessing = " . USER_ID . " ORDER BY guess_time DESC";
 $previous_guess_set = mysqli_query($db, $previousGuessSQL);
 
 
@@ -32,7 +32,10 @@ $previous_guess_set = mysqli_query($db, $previousGuessSQL);
                 <h1>Oops! It Looks Like You’re in the Wrong Place</h1>
                 <p class="lead">It seems you've landed here by mistake. No worries! To continue your adventure, please use the dropdown menu above to navigate back to the "Guess a Passcode" page. Your journey awaits, and we’re excited to have you back on track!</p>
             </div>
-          <?php } ?>
+          <?php }
+          if (isset($passcodeID) && (pattern_solved($db, $passcodeID) === 0)) {
+              include('keyboard.php');
+            } ?>
 			<div class="table-responsive">
 				<table class="table caption-top">
 					<caption>Previous Guesses</caption>
@@ -43,10 +46,10 @@ $previous_guess_set = mysqli_query($db, $previousGuessSQL);
 					</thead>
 					<tbody>
 						<tr style="text-align: center;">
-              <?php $count = 0; /*Set the count variable for the number of guesses made*/
+              <?php $count = mysqli_num_rows($previous_guess_set) + 1; /*Set the count variable for the number of guesses made*/
               while($pattern = mysqli_fetch_assoc($previous_guess_set)){
                   // Increment the count and get the guess id pattern
-                  $count++;
+                  $count--;
                   $guessID = $pattern['pattern_guessed'];
                   $correctGuess = $pattern['correct_pattern'];
                   $charList = view_passcode($db, $guessID);
@@ -70,12 +73,9 @@ $previous_guess_set = mysqli_query($db, $previousGuessSQL);
 					</tbody>
 				</table>
 			</div>
-      <?php if (isset($passcodeID) && (pattern_solved($db, $passcodeID) === 0)) {
-          include('keyboard.php');
-        } ?>
-        <div class="button-container">
-            <button class="galactic-button" onclick="window.location.href='<?php echo url_for('pick_passcode'); ?>';">Back to Passcode List</button>
-        </div>
+      <div class="button-container">
+          <button class="galactic-button" onclick="window.location.href='<?php echo url_for('pick_passcode'); ?>';">Back to Passcode List</button>
+      </div>
 		</div>
     </body>
 <?php include(PRIVATE_PATH . '/footer.php'); ?>

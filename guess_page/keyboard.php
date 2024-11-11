@@ -24,9 +24,6 @@
 </style>
 
 <!-- The below code was created using the assistance of ChatGPT 4.0. All code was properly tested and works as intended -->
-<div class="current-guess">Current Guess</div>
-<div id="output"></div>
-
 <div id="loadingIndicator" style="display:blcok;">
     <div class="spinner"></div>
 </div>
@@ -61,6 +58,9 @@
     }
     ?>
 </div>
+
+<div class="current-guess">Current Guess</div>
+<div id="output"></div>
 
 <div class="button-container">
     <button class="galactic-button" onclick="clearOutput()">Clear</button>

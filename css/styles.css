@@ -167,6 +167,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    min-height: 80px;
 }
 .output-image {
     width: 70px;
