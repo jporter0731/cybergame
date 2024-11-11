@@ -49,9 +49,7 @@ function passcode_difficulty($data){
 function createCharacterButton($imagePath, $altText, $class) {
     return "
         <td class='$class' style='text-align: center;'>
-            <button class='btn btn-default'>
-                <img src='$imagePath' width='80' alt='$altText' />
-            </button>
+            <img src='$imagePath' width='80' alt='$altText' />
         </td>
     ";
 }

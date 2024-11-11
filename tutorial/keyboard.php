@@ -9,7 +9,7 @@
         <div class="container">
             <div class="text-center mt-5">
                 <h1>Keyboard Tutorial</h1>
-                <p class="lead">Welcome to the Keyboard Tutorial! Here, you can familiarize yourself with the controls for Passcode Protector. The keys and their corresponding symbols are mapped below, giving you the tools you need to navigate this interstellar challenge. Use this page to practice and get comfortable with the keyboard before you venture into the game. Sharpen your skills, and prepare to unlock the mysteries of the galaxy!</p>
+                <p class="lead">Welcome to the Keyboard Tutorial! Here, you can familiarize yourself with the controls for Galactic Codebreaker. The keys and their corresponding symbols are mapped below, giving you the tools you need to navigate this interstellar challenge. Use this page to practice and get comfortable with the keyboard before you venture into the game. Sharpen your skills, and prepare to unlock the mysteries of the galaxy!</p>
             </div>
 			<!-- The below code was created using the assistance of ChatGPT 4.0. All code was properly tested and works as intended -->
       <div class="current-guess">Current Guess</div>

@@ -162,6 +162,32 @@ function get_available_patterns($connection){
     ];
   }
 
+  usort($passcodes, function($a, $b) {
+        // Define the order for status: "Complete" should always be last
+        $statusOrder = ['Not Started' => 0, 'In Progress' => 0, 'Complete' => 2];
+
+        // First, compare status: "Not Started" or "In Progress" should come before "Complete"
+        if ($statusOrder[$a['status']] < $statusOrder[$b['status']]) {
+            return -1; // $a comes before $b
+        } elseif ($statusOrder[$a['status']] > $statusOrder[$b['status']]) {
+            return 1; // $b comes before $a
+        }
+
+        // If statuses are the same, compare difficulty for non-complete patterns
+        if ($statusOrder[$a['status']] < 2 && $statusOrder[$b['status']] < 2) {
+            // Define the order for difficulty: Easy < Medium < Hard
+            $difficultyOrder = ['Easy' => 0, 'Medium' => 1, 'Hard' => 2];
+
+            if ($difficultyOrder[$a['difficulty']] < $difficultyOrder[$b['difficulty']]) {
+                return -1; // $a comes before $b
+            } elseif ($difficultyOrder[$a['difficulty']] > $difficultyOrder[$b['difficulty']]) {
+                return 1; // $b comes before $a
+            }
+        }
+
+        // If both status and difficulty are the same, keep the order unchanged
+        return 0;
+    });
   return $passcodes;
 }
 ?>

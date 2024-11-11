@@ -39,6 +39,10 @@ $fullExampleCharacters2 = [
                 <p class="lead">Welcome, aspiring codebreaker! As you embark on this thrilling journey through the stars, it's crucial to familiarize yourself with the rules that govern the game. Follow these steps to enhance your skills and ensure your success in cracking the passcode.</p>
             </div>
             <div class="text-center mt-5">
+                <h2>Your Goal</h2>
+                <p class="lead">Goal description goes here.</p>
+            </div>
+            <div class="text-center mt-5">
                 <h2>Enter Your Guess</h2>
                 <p class="lead">To begin your quest, use the on-screen keyboard or your keyboard shortcuts to enter your guess. Once you’ve crafted your potential passcode, click the Submit button to send your guess into the cosmic void. Every guess brings you closer to unlocking the mysteries hidden among the stars!</p>
             </div>
