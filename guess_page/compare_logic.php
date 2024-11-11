@@ -3,13 +3,22 @@
 function compare_patterns($connection, $guessList, $correctID){
   //Get the correct pattern list
   $correctList = view_passcode($connection, $correctID);
+  $compareList = [];
   $guessColors = [];
 
   //Check for correct characters in correct spots
   foreach ($guessList as $key => $value) {
     if($correctList[$key] === $value){
         $guessColors[$key] = "colorgn";
+        $compareList[$key] = $correctList[$key];
         unset($correctList[$key]);
+    }
+  }
+
+  //Compare the compareList and correctList to see if there are any quplicates
+  foreach ($compareList as $key => $value) {
+    if(in_array($value, $correctList)){
+      $guessColors[$key] = "colorgy";
     }
   }
 

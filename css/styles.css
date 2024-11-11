@@ -1562,6 +1562,11 @@ button:not(:disabled),
     color: white;
 }
 
+.table td.colorgy {
+    background: repeating-linear-gradient(-45deg, green, green 10px, yellow 10px, yellow 20px);
+    color: white;
+}
+
 .table-group-divider {
   border-top: 2px solid currentcolor;
 }
