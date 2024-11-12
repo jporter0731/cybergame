@@ -106,8 +106,6 @@ function submitOutput() {
   const alias = document.getElementById('aliasDisplay').innerText;
   const images = output.getElementsByTagName('img');
 
-  console.log('Generated Alias:', alias);
-
   //Verify that the passcode is not length 0 before continuing
   if (images.length === 0) {
       snackbar('error', 'Your passcode must be at least 1 character long.', 5000);
