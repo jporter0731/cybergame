@@ -66,12 +66,6 @@
                 </div>
             </div>
         </div>
-        <script>
-            function sendPasscode(passcodeID) {
-              // Save the passcode ID
-              sessionStorage.setItem('passcode_id', passcodeID);
-            }
-        </script>
     </div>
 </body>
 <?php include(PRIVATE_PATH . '/footer.php'); ?>
