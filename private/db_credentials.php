@@ -6,7 +6,7 @@
   define("DB_NAME", "cybergame");
 
   //For testing once fully implimented this should disappear
-  define("USER_ID", 5);
+  define("USER_ID", 4);
   define("USER_CREDENTIALS", [
     "jporter" => "vqy6a77ihq",
     "rweber" => "b9ps6k5zx0",

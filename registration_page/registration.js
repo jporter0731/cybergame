@@ -103,7 +103,10 @@ function clearOutput() {
 //Function that will submit the users passcode once entered
 function submitOutput() {
   const output = document.getElementById('output');
+  const alias = document.getElementById('aliasDisplay').innerText;
   const images = output.getElementsByTagName('img');
+
+  console.log('Generated Alias:', alias);
 
   //Verify that the passcode is not length 0 before continuing
   if (images.length === 0) {
@@ -120,23 +123,37 @@ function submitOutput() {
       imageFileNames.push(filename); // Add filename to the array
   }
 
-  // Send the array to a PHP file
-  fetch('set_passcode.php', {
+  // Send the output array to a the set passcode file
+  const setPass = fetch('set_passcode.php', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({ filenames: imageFileNames }) // Send as JSON
   })
-  .then(response => response.json())
-  // If the insert was successful add success to console
-  .then(data => {
-      console.log('Success:', data);
+
+  // Send the user ailias to the set alias PHP file
+  const setAilias = fetch('update_alias.php', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ alias: alias }) // Send as JSON
   })
-  // If the insert was unsuccessful add error to console
-  .catch((error) => {
-      console.error('Error:', error);
-  });
+
+  Promise.all([setPass, setAilias])
+        .then(responses => {
+            // Ensure both requests were successful
+            return Promise.all(responses.map(response => response.json()));
+        })
+        .then(data => {
+            // Handle the responses for both requests
+            console.log('Request 1 succeeded:', data[0]);
+            console.log('Request 2 succeeded:', data[1]);
+        })
+        .catch(error => {
+            console.error('Error:', error);  // Handle any errors
+        });
 
   // Clear the output after the pattern has been submited
   snackbar('success', 'Your pattern has been set.', 5000);

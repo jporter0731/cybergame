@@ -19,7 +19,7 @@ require('../private/initialize.php');
             <div class="text-center mt-5">
                 <h2>Choose an Alias</h2>
                 <p class="lead">Your galactic adventure begins with a unique alias, automatically chosen for you. This name will represent you as you journey through the stars. If you’d like to try a different one, simply click the button below to generate a new alias and start fresh.</p>
-                <p id="aliasDisplay"></p>
+                <p id="aliasDisplay">ALIAS HERE</p>
                 <div class="button-container">
                     <button class="galactic-button" onclick="generateAlias()">Generate New Alias</button>
                 </div>
@@ -70,6 +70,7 @@ require('../private/initialize.php');
             </div>
           </div>
       </div>
+      <script src="registration.js" defer></script>
     <?php } else { ?>
       <div class="container">
           <div class="text-center mt-5">
@@ -82,8 +83,5 @@ require('../private/initialize.php');
           </div>
       </div>
     <?php } ?>
-
-    <script src="registration.js" defer></script>
-    <script src="alias.js" defer></script>
   </body>
 <?php include(PRIVATE_PATH . '/footer.php'); ?>
