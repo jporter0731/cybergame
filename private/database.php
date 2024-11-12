@@ -27,6 +27,20 @@ function confirm_db_connect(){
   }
 }
 
+// Get the pattern for the user that is logged in
+function get_user_id($connection, $username){
+  //SQL Query to get information from the database table
+  $getPatternSQL = "SELECT user_id FROM users WHERE uname='" . $username . "'";
+
+  //Get the passcode infomration
+  $pattern_set = mysqli_query($connection, $getPatternSQL);
+  $passcode_info = mysqli_fetch_assoc($pattern_set);
+
+  $patternID = $passcode_info['user_id'];
+
+  return $patternID;
+}
+
 // Check whether the pattern id exists in the Database
 function pattern_solved($connection, $patternID){
     //SQL Query to get the list of patterns with a specific id
