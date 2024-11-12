@@ -18,9 +18,8 @@ if (isset($_SESSION['error'])) {
     <div class="container">
       <div class="row justify-content-center">
       <div class="col-md-6 col-lg-4">
-          <div class="card shadow-sm p-4 mt-5">
+          <div class="card shadow-sm p-4 mt-5" style="background-color: #A8B9E2;">
               <h2 class="text-center mb-4">Login</h2>
-              
               <!-- Show error message if it exists -->
                 <?php if (isset($error_message)): ?>
                     <div class="alert alert-danger">
@@ -42,7 +41,7 @@ if (isset($_SESSION['error'])) {
                   </div>
                   <!-- Submit button -->
                   <div class="d-grid gap-2">
-                      <button type="submit" class="btn btn-primary">Login</button>
+                      <button type="submit" class="galactic-button">Login</button>
                   </div>
               </form>
           </div>

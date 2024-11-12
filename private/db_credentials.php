@@ -6,5 +6,13 @@
   define("DB_NAME", "cybergame");
 
   //For testing once fully implimented this might change
-  define("USER_ID", 2);
+  define("USER_ID", 3);
+  define("USER_CREDENTIALS", [
+    "jporter" => "password123",
+    "rweber" => "password123",
+    "aborgstrom" => "password1",
+    "cschauf" => "password2",
+    "hboesl" => "password3",
+    "jhuffman" => "password"
+  ]);
  ?>

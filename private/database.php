@@ -44,7 +44,7 @@ function pattern_solved($connection, $patternID){
 // Check whether the pattern id exists in the Database
 function pattern_exists($connection, $patternID){
     //SQL Query to get the list of patterns with a specific id
-    $patternSQL = "SELECT * FROM patterns WHERE pattern_id = " . $patternID;
+    $patternSQL = "SELECT * FROM patterns WHERE pattern_id = '" . $patternID . "'";
 
     //Get the passcode infomration
     $pattern_set = mysqli_query($connection, $patternSQL);
@@ -56,7 +56,7 @@ function pattern_exists($connection, $patternID){
 // Check whether the pattern id exists in the Database
 function user_exists($connection, $userName){
     //SQL Query to get the list of patterns with a specific id
-    $patternSQL = "SELECT * FROM users WHERE uname = " . $userName;
+    $patternSQL = "SELECT * FROM users WHERE uname = '" . $userName . "'";
 
     //Get the passcode infomration
     $pattern_set = mysqli_query($connection, $patternSQL);
