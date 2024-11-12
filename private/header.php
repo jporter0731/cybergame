@@ -4,8 +4,6 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
   <title>Galactic Codebreaker</title>
-  <!-- Favicon-->
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href=<?php echo CSS_PATH; ?> rel="stylesheet" />
 </head>

@@ -156,4 +156,5 @@ function submitOutput() {
   // Clear the output after the pattern has been submited
   snackbar('success', 'Your pattern has been set.', 5000);
   clearOutput();
+  
 }
