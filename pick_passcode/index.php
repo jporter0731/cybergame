@@ -45,7 +45,7 @@
                         <div class="col-md-3 d-flex justify-content-center">
                             <div class="card" style="width: 18rem;">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Passcode <?php echo $passcode['id']; ?></li>
+                                    <li class="list-group-item"><?php echo get_user_alias($db, $passcode['id']); ?></li>
                                     <li class="list-group-item">Difficulty: <?php echo $passcode['difficulty']; ?></li>
                                     <li class="list-group-item">Status: <?php echo $passcode['status']; ?></li>
                                     <li class="list-group-item">Guess Count: <?php echo $passcode['guess_count']; ?></li>
