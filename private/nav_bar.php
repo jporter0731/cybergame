@@ -19,7 +19,7 @@ require('session.php')
                         $loggedIn = checkSession();
                         if($loggedIn){ ?>
                           <li><hr class="dropdown-divider" /></li>
-                          <li><a class="dropdown-item" href="#">Log Out</a></li>
+                          <li><a class="dropdown-item" href="<?php echo url_for('private/logout.php'); ?>">Log Out</a></li>
                         <?php }
                         ?>
                     </ul>
