@@ -5,7 +5,7 @@ require ('compare_logic.php');
 
 $passcodeID = isset($_GET['passcode_id']) ? $_GET['passcode_id'] : null;
 
-$previousGuessSQL = "SELECT * FROM guesses WHERE correct_pattern = " . $passcodeID . " AND user_guessing = " . USER_ID . " ORDER BY guess_time DESC";
+$previousGuessSQL = "SELECT * FROM guesses WHERE correct_pattern = " . $passcodeID . " AND user_guessing = " . $_SESSION['user_id'] . " ORDER BY guess_time DESC";
 $previous_guess_set = mysqli_query($db, $previousGuessSQL);
 
 

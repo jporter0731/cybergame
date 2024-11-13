@@ -29,7 +29,7 @@
             </div>
             <p class="lead">Number of Guesses: <?php echo $passcode['guesses']; ?></p>
             <p class="lead">Number of Correct Guesses: <?php echo $passcode['correct_guesses']; ?></p>
-            <p class="lead">Pattern Score: <?php echo calculate_passcode_score($db, USER_ID, get_user_pattern_difficulty($db)); ?></p>
+            <p class="lead">Pattern Score: <?php echo calculate_passcode_score($db, $_SESSION['username'], get_user_pattern_difficulty($db)); ?></p>
             <p class="lead">Guess Score: <?php echo get_user_score($db); ?></p>
         </div>
     </body>

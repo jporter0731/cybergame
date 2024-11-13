@@ -1,11 +1,20 @@
 <?php
+//require('database.php');
+
   function startSession($username){
     session_start();
 
     // Set a session variable to track the login status
     $_SESSION['loggedin'] = true;
     $_SESSION['username'] = $username;
+    $_SESSION['user_id'] = get_user_id($db, $username);
+  }
 
+  function setUserID($id){
+    $_SESSION['user_id'] = $id;
+  }
+
+  function getUserFromDatabase($username){
     $_SESSION['user_id'] = get_user_id($db, $username);
   }
 
