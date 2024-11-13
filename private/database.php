@@ -233,8 +233,42 @@ function get_user_alias($connection, $patternID){
 }
 
 // This function will update the user score after a pattern is solved
-function update_score($connection){
+function update_score($connection, $pattern){
+  //Get the user score
+  $userScoreSQL = "SELECT score FROM users WHERE user_id=". USER_ID;
+  $user_set = mysqli_query($connection, $userScoreSQL);
+  $user = mysqli_fetch_assoc($user_set);
 
+  //Set initial values
+  $score = $user['score'];
+  $difficultyMultiplyer = 1;
+
+  //Get incorrect guesses
+  $sqlPasscodes = "SELECT correct_guess FROM guesses WHERE user_guessing=". USER_ID. " AND correct_pattern=". $pattern. " AND correct_guess = 0";
+  $guess_set = mysqli_query($connection, $sqlPasscodes);
+
+  $incorrectGuesses = mysqli_num_rows($guess_set);
+
+  //Get the pattern difficulty
+  $getDifficultySQL = "SELECT difficulty FROM patterns WHERE pattern_id='". $pattern. "'";
+  $difficulty_set = mysqli_query($connection, $getDifficultySQL);
+  $difficultyArray = mysqli_fetch_assoc($difficulty_set);
+
+  $difficulty = $difficultyArray['difficulty'];
+
+  if ($difficulty === "Easy"){
+    $difficultyMultiplyer = 1;
+  }elseif($difficulty === "Medium"){
+    $difficultyMultiplyer = 2;
+  }else{
+    $difficultyMultiplyer = 4;
+  }
+
+  //Update score
+  $score += ($difficultyMultiplyer * (100 - ($incorrectGuesses * 5)));
+  $updateUserSQL = "UPDATE users SET score = '". $score ."' WHERE user_id = " . USER_ID;
+
+  $updateResult = mysqli_query($connection, $updateUserSQL);
 }
 
 // This function will get the list of the top passcodes
