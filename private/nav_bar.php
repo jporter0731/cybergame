@@ -1,3 +1,6 @@
+<?php session_start();
+require('session.php')
+?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href=<?php echo url_for('pick_passcode'); ?>>Galactic Codebreaker</a>
@@ -12,8 +15,13 @@
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="<?php echo url_for('tutorial'); ?>">Tutorial</a></li>
                         <li><a class="dropdown-item" href="<?php echo url_for('leaderboard'); ?>">Leaderboard</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#">Log Out</a></li>
+                        <?php
+                        $loggedIn = checkSession();
+                        if($loggedIn){ ?>
+                          <li><hr class="dropdown-divider" /></li>
+                          <li><a class="dropdown-item" href="#">Log Out</a></li>
+                        <?php }
+                        ?>
                     </ul>
                 </li>
             </ul>

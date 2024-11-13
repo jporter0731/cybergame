@@ -16,12 +16,10 @@
     $timeout = 900;
 
     // Check if a user is actually logged in
-    if( isset( $_SESSION['loggedin']) && $_SESSION['loggedin'] === false){
+    if( !isset( $_SESSION['loggedin']) || $_SESSION['loggedin'] === false){
       session_unset();
       session_destroy();
-      // Redirect to the login page
-      header("Location: ../login");
-      exit();
+      return false;
     }
 
     // Check existing timeout variable
@@ -33,11 +31,11 @@
     	if( $duration > $timeout ) {
         session_unset();
         session_destroy();
-        // Redirect to the login page
-        header("Location: ../login");
-        exit();
+        return false;
     	}
     }
+
+    return true;
   }
 
   function endSession(){

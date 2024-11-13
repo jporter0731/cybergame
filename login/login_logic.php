@@ -1,6 +1,7 @@
 <?php
-session_start();
 require('../private/initialize.php');
+require('../private/session.php');
+session_start();  // Start the session
 
 //Check the entered username and password against expected
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -8,12 +9,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // FIXME remove after testing
-
     // FIXME Add ldap authentication here.
     //Check if the username is in the array
     if (array_key_exists($username, USER_CREDENTIALS) && USER_CREDENTIALS[$username] === $password) {
         $count = user_exists($db, $username);
+        //Start the session
+        startSession($username);
+
         if($count > 0){
             header("Location: ../pick_passcode");
         }else{
