@@ -1,5 +1,4 @@
 <?php
-  require('initialize.php');
   function startSession($username){
     session_start();
 

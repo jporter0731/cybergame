@@ -1,6 +1,5 @@
 <?php
 require('../private/initialize.php');
-require('../private/session.php');
 session_start();  // Start the session
 
 //Check the entered username and password against expected

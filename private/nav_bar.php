@@ -1,5 +1,4 @@
 <?php session_start();
-require('session.php')
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
