@@ -217,6 +217,21 @@ function get_available_patterns($connection){
   return $passcodes;
 }
 
+function get_user_alias($connection, $patternID){
+  // Connect the pattern id to a user
+  $userPatternSQL = "SELECT alias FROM users WHERE user_pattern=". $patternID;
+  $user_set = mysqli_query($connection, $userPatternSQL);
+
+  $user = mysqli_fetch_assoc($user_set);
+  $userAlias = $user['alias'];
+
+  if ($userAlias === null){
+    return "Game Pattern " . $patternID;
+  }else{
+    return $userAlias;
+  }
+}
+
 // This function will update the user score after a pattern is solved
 function update_score($connection){
 
@@ -252,12 +267,14 @@ function get_top_passcodes($connection){
     $correctGuessesSQL = "SELECT correct_guess FROM guesses WHERE correct_pattern=". $pattern['pattern_id'] . "AND correct_guess=1";
     $correct_guess_set = mysqli_query($connection, $correctGuessesSQL);
 
+    $alias = get_user_alias($connection, $pattern['pattern_id']);
+
     // Get the count of the correct guesses
     $score -= (mysqli_num_rows($correct_guess_set) * 25);
 
     $rankedArray[] = [
       'score' => $score,
-      'passcode' => $pattern['pattern_id']
+      'passcode' => $alias
     ];
   }
 
@@ -284,6 +301,37 @@ function get_top_passcodes($connection){
 
 // This function will get the list of top users
 function get_top_users($connection){
+  //setup the ranked array
+  $rankedArray = [];
 
+  $getUsersSQL = "SELECT alias, score FROM users";
+  $pattern_set = mysqli_query($connection, $getUsersSQL);
+
+  while($user = mysqli_fetch_assoc($pattern_set)){
+    $rankedArray[] = [
+      'score' => $user['score'],
+      'alias' => $user['alias']
+    ];
+  }
+
+  usort($rankedArray, function($a, $b) {
+        // Sort by score in descending order
+        if ($a['score'] == $b['score']) {
+            // If scores are equal, sort by passcode alphabetically
+            return strcmp($a['alias'], $b['alias']);
+        }
+        return $b['score'] - $a['score']; // Descending score order
+    });
+
+    // Reduce array to just 10 values
+    $topTenArray = array_slice($rankedArray, 0, 10);
+
+    // Add rank field to each element
+    $rank = 1;
+    foreach ($topTenArray as &$item) {
+        $item['rank'] = $rank++;
+    }
+
+  return $topTenArray;
 }
 ?>

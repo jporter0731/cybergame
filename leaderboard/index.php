@@ -4,18 +4,7 @@
 $passcodeData = get_top_passcodes($db);
 
 // Example PHP code to fetch top 10 leaderboard data from a database
-$aliasData = [
-    ['rank' => 1, 'alias' => 'Pattern1', 'score' => 100],
-    ['rank' => 2, 'alias' => 'Pattern2', 'score' => 95],
-    ['rank' => 3, 'alias' => 'Pattern1', 'score' => 100],
-    ['rank' => 4, 'alias' => 'Pattern2', 'score' => 95],
-    ['rank' => 5, 'alias' => 'Pattern1', 'score' => 100],
-    ['rank' => 6, 'alias' => 'Pattern2', 'score' => 95],
-    ['rank' => 7, 'alias' => 'Pattern1', 'score' => 100],
-    ['rank' => 8, 'alias' => 'Pattern2', 'score' => 95],
-    ['rank' => 9, 'alias' => 'Pattern1', 'score' => 100],
-    ['rank' => 10, 'alias' => 'Pattern2', 'score' => 95],
-];
+$aliasData = get_top_users($db);
 
 ?>
 <html lang="en">

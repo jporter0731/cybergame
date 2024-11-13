@@ -155,6 +155,9 @@ function submitOutput() {
 
   // Clear the output after the pattern has been submited
   snackbar('success', 'Your pattern has been set.', 5000);
+  setTimeout(function() {
+        window.location.href = '../tutorial';  // Change this URL to where you want to redirect
+  }, 3000); // 3000ms = 3 seconds
   clearOutput();
-  
+
 }
