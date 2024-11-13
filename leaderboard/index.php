@@ -1,11 +1,22 @@
 <?php require('../private/initialize.php');
 
 // Example PHP code to fetch top 10 leaderboard data from a database
-$leaderboardData = [
-    ['rank' => 1, 'passcode' => 'Pattern1', 'score' => 100],
-    ['rank' => 2, 'passcode' => 'Pattern2', 'score' => 95],
-    // Add more data...
+$passcodeData = get_top_passcodes($db);
+
+// Example PHP code to fetch top 10 leaderboard data from a database
+$aliasData = [
+    ['rank' => 1, 'alias' => 'Pattern1', 'score' => 100],
+    ['rank' => 2, 'alias' => 'Pattern2', 'score' => 95],
+    ['rank' => 3, 'alias' => 'Pattern1', 'score' => 100],
+    ['rank' => 4, 'alias' => 'Pattern2', 'score' => 95],
+    ['rank' => 5, 'alias' => 'Pattern1', 'score' => 100],
+    ['rank' => 6, 'alias' => 'Pattern2', 'score' => 95],
+    ['rank' => 7, 'alias' => 'Pattern1', 'score' => 100],
+    ['rank' => 8, 'alias' => 'Pattern2', 'score' => 95],
+    ['rank' => 9, 'alias' => 'Pattern1', 'score' => 100],
+    ['rank' => 10, 'alias' => 'Pattern2', 'score' => 95],
 ];
+
 ?>
 <html lang="en">
 <?php include(PRIVATE_PATH . '/header.php'); ?>
@@ -18,46 +29,70 @@ $leaderboardData = [
     <div class="container">
         <div class="text-center mt-5">
             <h1>Leaderboard</h1>
-            <p class="lead"><br/>Welcome to the Galactic Codebreaker Leaderboard, where you can see the top players who have demonstrated their extraordinary talent in cracking the cosmic codes. Compete against friends and fellow adventurers as you climb the ranks and prove your prowess.<br/><br/>Will you rise to the challenge and etch your name among the stars? Check back often to see if you’ve claimed the top spot or if new challengers are hot on your trail. May the best codebreaker win!<br/><br/></p>
+            <p class="lead">Welcome to the Galactic Codebreaker Leaderboard, where you can see the top players who have demonstrated their extraordinary talent in cracking the cosmic codes. Compete against friends and fellow adventurers as you climb the ranks and prove your prowess.<br/></p>
             <div class="container">
               <div class="row">
                 <!-- First section (Galactic Guessmasters) -->
                 <div class="col-md-6">
-                  <h2>Galactic Guessmasters</h2>
-                  <p class="lead">The elite players with the highest scores in the cosmic codebreaking challenge.</p>
                   <!-- Put user leaderboard here -->
-                </div>
-
-                <!-- Second section (Legendary Passcodes) -->
-                <div class="col-md-6">
-                  <h2>Legendary Passcodes</h2>
-                  <p class="lead">The most challenging codes that have tested the galaxy's brightest minds.</p>
-                  <!-- This is the start of the passcodes ranking card -->
                   <div class="container mt-4">
                     <div class="row">
                       <div class="col-12">
                         <div class="card">
-                          <div class="card-header">
-                            <h3 class="card-title">Top 10 Patterns</h3>
+                          <div class="card-header" style="background-color: #C4A4A4;">
+                            <h3 class="card-title">Galactic Guessmasters</h3>
                           </div>
-                          <div class="card-body">
+                          <div class="card-body" style="background-color: #A8B9E2;">
                             <div class="row">
                               <div class="col-md-4"><h5>Rank</h5></div>
-                              <div class="col-md-4"><h5>Passcode</h5></div>
+                              <div class="col-md-4"><h5>Alias</h5></div>
                               <div class="col-md-4"><h5>Score</h5></div>
                             </div>
-                            <?php foreach ($leaderboardData as $entry): ?>
+                            <?php foreach ($aliasData as $entry): ?>
                               <div class="row">
                                 <div class="col-md-4"><?= $entry['rank'] ?></div>
-                                <div class="col-md-4"><?= $entry['passcode'] ?></div>
+                                <div class="col-md-4"><?= $entry['alias'] ?></div>
                                 <div class="col-md-4"><?= $entry['score'] ?></div>
                               </div>
+                              <hr>
                             <?php endforeach; ?>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                </div>
+
+                <!-- Second section (Legendary Passcodes) -->
+                <div class="col-md-6">
+                  <!-- This is the start of the passcodes ranking card -->
+                  <div class="container mt-4">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="card">
+                          <div class="card-header" style="background-color: #C4A4A4;">
+                            <h3 class="card-title">Legendary Passcodes</h3>
+                          </div>
+                          <div class="card-body" style="background-color: #A8B9E2;">
+                            <div class="row">
+                              <div class="col-md-4"><h5>Rank</h5></div>
+                              <div class="col-md-4"><h5>User Alias</h5></div>
+                              <div class="col-md-4"><h5>Score</h5></div>
+                            </div>
+                            <?php foreach ($passcodeData as $entry): ?>
+                              <div class="row">
+                                <div class="col-md-4"><?= $entry['rank'] ?></div>
+                                <div class="col-md-4"><?= $entry['passcode'] ?></div>
+                                <div class="col-md-4"><?= $entry['score'] ?></div>
+                              </div>
+                              <hr>
+                            <?php endforeach; ?>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <p class="lead">The most challenging codes that have tested the galaxy's brightest minds.</p> FIXME remove or put back in later -->
                 </div>
               </div>
             </div>

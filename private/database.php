@@ -216,4 +216,74 @@ function get_available_patterns($connection){
     });
   return $passcodes;
 }
+
+// This function will update the user score after a pattern is solved
+function update_score($connection){
+
+}
+
+// This function will get the list of the top passcodes
+function get_top_passcodes($connection){
+  // Setup the ranking array
+  $rankedArray = [];
+
+  $getPatternSQL = "SELECT pattern_id, difficulty FROM patterns WHERE difficulty IS NOT NULL;";
+  $pattern_set = mysqli_query($connection, $getPatternSQL);
+
+  while($pattern = mysqli_fetch_assoc($pattern_set)){
+    //Figure out how many guesses were made on a specific pattern
+    $getGuessesSQL = "SELECT correct_guess FROM guesses WHERE correct_pattern=". $pattern['pattern_id'];
+    $guess_set = mysqli_query($connection, $getGuessesSQL);
+    $score = 0;
+
+    // Get the pattern base score
+    if($pattern['difficulty'] === "Easy"){
+      $score = 25;
+    }elseif($pattern['difficulty'] === "Medium"){
+      $score = 50;
+    }else{
+      $score = 100;
+    }
+
+    // Get the count of the guesses
+    $score += (mysqli_num_rows($guess_set) * 5);
+
+    //Figure out how many correct guesses were made on a specific pattern
+    $correctGuessesSQL = "SELECT correct_guess FROM guesses WHERE correct_pattern=". $pattern['pattern_id'] . "AND correct_guess=1";
+    $correct_guess_set = mysqli_query($connection, $correctGuessesSQL);
+
+    // Get the count of the correct guesses
+    $score -= (mysqli_num_rows($correct_guess_set) * 25);
+
+    $rankedArray[] = [
+      'score' => $score,
+      'passcode' => $pattern['pattern_id']
+    ];
+  }
+
+  usort($rankedArray, function($a, $b) {
+        // Sort by score in descending order
+        if ($a['score'] == $b['score']) {
+            // If scores are equal, sort by passcode alphabetically
+            return strcmp($a['passcode'], $b['passcode']);
+        }
+        return $b['score'] - $a['score']; // Descending score order
+    });
+
+    // Reduce array to just 10 values
+    $topTenArray = array_slice($rankedArray, 0, 10);
+
+    // Add rank field to each element
+    $rank = 1;
+    foreach ($topTenArray as &$item) {
+        $item['rank'] = $rank++;
+    }
+
+  return $topTenArray;
+}
+
+// This function will get the list of top users
+function get_top_users($connection){
+
+}
 ?>

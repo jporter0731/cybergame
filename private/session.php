@@ -12,17 +12,43 @@
 
   function checkSession(){
     session_start();
+    // Session timeout duration in seconds
+    $timeout = 900;
+
+    // Check if a user is actually logged in
+    if( isset( $_SESSION['loggedin']) && $_SESSION['loggedin'] === false){
+      session_unset();
+      session_destroy();
+      // Redirect to the login page
+      header("Location: ../login");
+      exit();
+    }
+
+    // Check existing timeout variable
+    elseif( isset( $_SESSION['lastaccess'] ) ) {
+    	// Time difference since user sent last request
+    	$duration = time() - intval( $_SESSION['lastaccess'] );
+
+    	// Destroy if last request was sent before the current time minus last request
+    	if( $duration > $timeout ) {
+        session_unset();
+        session_destroy();
+        // Redirect to the login page
+        header("Location: ../login");
+        exit();
+    	}
+    }
   }
 
   function endSession(){
     session_start();  // Start the session
 
     // Destroy all session data
-    session_unset();  // Unset all session variables
-    session_destroy();  // Destroy the session itself
+    session_unset();
+    session_destroy();
 
     // Redirect to the login page
     header("Location: ../login");
-    exit();  // Stop script execution
+    exit();
   }
 ?>
