@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (array_key_exists($username, USER_CREDENTIALS) && USER_CREDENTIALS[$username] === $password) {
         $count = user_exists($db, $username);
         //Start the session
-        startSession($username);
+        startSession($db, $username);
 
         if($count > 0){
             header("Location: ../pick_passcode");

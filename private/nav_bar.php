@@ -21,8 +21,6 @@
                           <li><a class="dropdown-item" href="<?php echo url_for('private/logout.php'); ?>">Log Out</a></li>
                         <?php }
                         ?>
-
-                        <li><a class="dropdown-item" href="#"><?php echo $_SESSION['user_id']; ?></a></li>
                     </ul>
                 </li>
             </ul>
