@@ -6,6 +6,8 @@ ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/relea
 # install mysql ext
 RUN install-php-extensions mysqli
 
+ENV MARIADB_HOST=cybergame-mariadb
+
 # Expose apache.
 EXPOSE 80
 
