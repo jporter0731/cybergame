@@ -1,4 +1,6 @@
 <?php require('../private/initialize.php');
+check_redirect();
+
 require ('compare_logic.php');
 
 $passcodeID = isset($_GET['passcode_id']) ? $_GET['passcode_id'] : null;

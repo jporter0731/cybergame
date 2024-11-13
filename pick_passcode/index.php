@@ -1,6 +1,8 @@
 <?php
   require('../private/initialize.php');
 
+  check_redirect();
+
   // Get a list of all the patterns in the database that can be guessed
   $passcodes = get_available_patterns($db);
 

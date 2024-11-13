@@ -1,5 +1,6 @@
 <?php
     require('../private/initialize.php');
+    check_redirect();
 
     $passcode = view_passcode_queries($db);
 

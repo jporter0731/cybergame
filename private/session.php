@@ -37,4 +37,12 @@
     return true;
   }
 
+  function check_redirect(){
+    $loggedIn = checkSession();
+
+    if (!$loggedIn){
+      // Redirect to the login page
+      header("Location: ../login");
+    }
+  }
 ?>

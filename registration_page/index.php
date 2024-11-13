@@ -1,5 +1,6 @@
 <?php
 require('../private/initialize.php');
+check_redirect();
 ?>
 <html lang="en">
 <?php include(PRIVATE_PATH . '/header.php'); ?>
