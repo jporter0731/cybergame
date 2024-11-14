@@ -11,6 +11,9 @@ ENV MARIADB_HOST=cybergame-mariadb
 # Expose apache.
 EXPOSE 80
 
+# use production PHP file
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+
 # create root redirect
 RUN echo "<?php header('Location: /cybergame') ?>" > /var/www/html/index.php
 
