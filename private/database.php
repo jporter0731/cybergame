@@ -346,7 +346,6 @@ function get_top_passcodes($connection){
 
   while($pattern = mysqli_fetch_assoc($pattern_set)){
     $alias = get_user_alias_from_pattern($connection, $pattern['pattern_id']);
-    $alias .= $pattern['pattern_id'];
     // Get passcode score
     $score = calculate_passcode_score($connection, $pattern['pattern_id'], $pattern['difficulty']);
 
