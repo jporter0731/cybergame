@@ -9,11 +9,11 @@ check_redirect();
     <?php include(PRIVATE_PATH . '/nav_bar.php'); ?>
 
     <!-- Show this if the passcode is already set-->
-    <?php if (get_user_pattern($db) === NULL) { ?>
+    <?php if (!isset($_SESSION['user_id'])) { ?>
       <div class="container">
         <div class="container">
             <div class="text-center mt-5">
-                <h1>Registration--<?php echo url_for('pick_passcode'); ?></h1>
+                <h1>Registration</h1>
                 <p class="lead">Welcome, space explorer! Your galactic journey begins here. Set your passcode to secure your adventure, and get your unique alias to represent you among the stars. If you'd like to explore a different identity, just click to generate a new alias.</p>
             </div>
             <div id="snackbar-container"></div>
