@@ -1,5 +1,6 @@
 <?php
 require('../private/initialize.php');
+session_start();
 
 // Get the information from the json sent from the html code
 $data = json_decode(file_get_contents('php://input'), true);
@@ -27,7 +28,7 @@ $insertResult = mysqli_query($db, $sqlInsert);
 
 // Set the ID of the pattern created to be connected to the user
 $patternID = mysqli_insert_id($db);
-$insertUserSQL = "INSERT INTO users (uname, user_pattern, score) VALUES ('". $_SESSION['user_id'] ."', ". $patternID .", 0)";
+$insertUserSQL = "INSERT INTO users (uname, user_pattern, score) VALUES ('". $_SESSION['username'] ."', ". $patternID .", 0)";
 
 $updateResult = mysqli_query($db, $insertUserSQL);
 $userID = mysqli_insert_id($db);
