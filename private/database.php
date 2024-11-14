@@ -328,7 +328,7 @@ function calculate_passcode_score($connection, $patternID, $difficulty){
   }
 
   // Get the count of the guesses
-  $score += (mysqli_num_rows($guess_set) * 5);
+  $score += (mysqli_num_rows($guess_set) * 10);
 
   // Get the count of the correct guesses
   $score -= (mysqli_num_rows($correct_guess_set) * 25);

@@ -42,7 +42,7 @@ check_redirect();?>
                           <span>-25 pts/guess</span>
                         </li>
                         <li class="list-group-item"><strong>Total Guesses</strong><br/>
-                          <span>5 pts/guess</span>
+                          <span>10 pts/guess</span>
                         </li>
                     </ul>
                 </div>

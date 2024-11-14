@@ -32,10 +32,10 @@
     $aliasSQL = "SELECT * FROM users WHERE alias = '" . $alias . "'";
 
     //Get the passcode infomration
-    $pattern_set = mysqli_query($db, $aliasSQL);
-    $count = mysqli_num_rows($pattern_set);
+    $alias_set = mysqli_query($db, $aliasSQL);
+    $count = mysqli_num_rows($alias_set);
 
-    if ($count === null){
+    if (!isset($count)){
       return 1;
     } else{
       return 0;
