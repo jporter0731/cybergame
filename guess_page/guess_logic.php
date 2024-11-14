@@ -1,6 +1,7 @@
 <?php
 require('../private/initialize.php');
 require('compare_logic.php');
+session_start();
 
 // Get the information from the json sent from the html code
 $data = json_decode(file_get_contents('php://input'), true);
@@ -34,7 +35,7 @@ $patternID = mysqli_insert_id($db);
 //$correctID = 1234;
 $correctGuess = correct_guess($db, $patternID, $correctID);
 $insertGuessSQL = "INSERT INTO guesses (user_guessing, pattern_guessed, correct_pattern, correct_guess) ";
-$insertGuessSQL .= "VALUES ('" . USER_ID . "', '" . $patternID . "', '" . $correctID . "', '" . $correctGuess . "')";
+$insertGuessSQL .= "VALUES ('" . $_SESSION['user_id'] . "', '" . $patternID . "', '" . $correctID . "', '" . $correctGuess . "')";
 
 if($correctGuess === 1){
   update_score($db, $correctID);

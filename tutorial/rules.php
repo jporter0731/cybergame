@@ -1,5 +1,6 @@
 <?php
 require('../private/initialize.php');
+check_redirect();
 
 // Example Data
 $exampleCharacters = [

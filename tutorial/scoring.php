@@ -1,4 +1,5 @@
-<?php require('../private/initialize.php');?>
+<?php require('../private/initialize.php');
+check_redirect();?>
 
 <html lang="en">
     <?php include(PRIVATE_PATH . '/header.php'); ?>
@@ -19,8 +20,8 @@
                         <span style="margin-right: 20px;">Medium: x2 pts</span>
                         <span>Hard: x4 pts</span>
                       </li>
-                      <li class="list-group-item"><strong>Correct Guess</strong><br/>
-                        <span>100 pts/guess</span>
+                      <li class="list-group-item"><strong>Passcode Solved</strong><br/>
+                        <span>100 pts</span>
                       </li>
                       <li class="list-group-item"><strong>Incorrect Guesses</strong><br/>
                         <span>-5 pts/guess</span>
@@ -37,7 +38,7 @@
                           <span style="margin-right: 20px;">Medium: 50 pts</span>
                           <span>Hard: 100 pts</span>
                         </li>
-                        <li class="list-group-item"><strong>Correct Guesses</strong><br/>
+                        <li class="list-group-item"><strong>Solved Passcode Count</strong><br/>
                           <span>-25 pts/guess</span>
                         </li>
                         <li class="list-group-item"><strong>Total Guesses</strong><br/>

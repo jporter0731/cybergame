@@ -1,5 +1,6 @@
 <?php
 require('../private/initialize.php');
+session_start();
 // Get the raw POST data
 $inputData = file_get_contents('php://input');
 
@@ -11,7 +12,7 @@ if (isset($data['alias'])) {
     $alias = $data['alias'];
 
     //update user alias
-    $updateUserSQL = "UPDATE users SET alias = '" . $alias . "' WHERE user_id = " . USER_ID;
+    $updateUserSQL = "UPDATE users SET alias = '" . $alias . "' WHERE user_id = " . $_SESSION['user_id'];
     $updateResult = mysqli_query($db, $updateUserSQL);
 
     // For this example, we'll just echo the alias back as a response

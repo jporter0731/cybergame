@@ -1,13 +1,20 @@
 <?php
-  require('initialize.php');
+
   function startSession($username){
     session_start();
 
     // Set a session variable to track the login status
     $_SESSION['loggedin'] = true;
     $_SESSION['username'] = $username;
+    $_SESSION['lastaccess'] = time();
+  }
 
-    $_SESSION['user_id'] = get_user_id($db, $username);
+  function setUserID($id){
+    $_SESSION['user_id'] = $id;
+  }
+
+  function getUserFromDatabase($connection, $username){
+    $_SESSION['user_id'] = get_user_id($connection, $username);
   }
 
   function checkSession(){
@@ -16,12 +23,10 @@
     $timeout = 900;
 
     // Check if a user is actually logged in
-    if( isset( $_SESSION['loggedin']) && $_SESSION['loggedin'] === false){
+    if( !isset( $_SESSION['loggedin']) || $_SESSION['loggedin'] === false){
       session_unset();
       session_destroy();
-      // Redirect to the login page
-      header("Location: ../login");
-      exit();
+      return false;
     }
 
     // Check existing timeout variable
@@ -33,22 +38,21 @@
     	if( $duration > $timeout ) {
         session_unset();
         session_destroy();
-        // Redirect to the login page
-        header("Location: ../login");
-        exit();
+        return false;
     	}
     }
+
+    //Reset the session timer
+    $_SESSION['lastaccess'] = time();
+    return true;
   }
 
-  function endSession(){
-    session_start();  // Start the session
+  function check_redirect(){
+    $loggedIn = checkSession();
 
-    // Destroy all session data
-    session_unset();
-    session_destroy();
-
-    // Redirect to the login page
-    header("Location: ../login");
-    exit();
+    if (!$loggedIn){
+      // Redirect to the login page
+      header("Location: ../login");
+    }
   }
 ?>

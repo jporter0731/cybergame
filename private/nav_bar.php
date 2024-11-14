@@ -1,3 +1,5 @@
+<?php session_start();
+?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href=<?php echo url_for('pick_passcode'); ?>>Galactic Codebreaker</a>
@@ -8,12 +10,17 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menu</a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="<?php echo url_for('pick_passcode'); ?>">Guess a Passcode</a></li>
-                        <li><a class="dropdown-item" href="<?php echo url_for('view_passcode'); ?>">View my Passcode</a></li>
+                        <li><a class="dropdown-item" href="<?php echo url_for('view_passcode'); ?>">View my Statistics</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="<?php echo url_for('tutorial'); ?>">Tutorial</a></li>
                         <li><a class="dropdown-item" href="<?php echo url_for('leaderboard'); ?>">Leaderboard</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#">Log Out</a></li>
+                        <?php
+                        $loggedIn = checkSession();
+                        if($loggedIn){ ?>
+                          <li><hr class="dropdown-divider" /></li>
+                          <li><a class="dropdown-item" href="<?php echo url_for('private/logout.php'); ?>">Log Out</a></li>
+                        <?php }
+                        ?>
                     </ul>
                 </li>
             </ul>

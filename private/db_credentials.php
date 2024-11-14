@@ -7,8 +7,6 @@
   define("DB_PASS", "zia8#My*uVw27Lg");
   define("DB_NAME", "cybergame");
 
-  //For testing once fully implimented this should disappear
-  define("USER_ID", 1);
   define("USER_CREDENTIALS", [
     "jporter" => "vqy6a77ihq",
     "rweber" => "b9ps6k5zx0",

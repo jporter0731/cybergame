@@ -1,5 +1,6 @@
 <?php
   require('../private/initialize.php');
+  session_start();
 
   // Generate a random user alias based on the arrays $firstWord and $secondWord
   $firstWord = ["Rapid", "Bouncy", "Swift", "Whistling", "Graceful", "Spiraling", "Slippery", "Fidgety", "Endless", "Speedy", "Round", "Springy", "Mischievous", "Rhythmic", "Smooth", "Wild", "Excited", "Cozy", "Splashy", "Fiery", "Energetic", "Refined", "Stealthy", "Fast", "Twisty", "Powerful", "Mighty", "Messy", "Weightless", "Flexible"];
@@ -22,6 +23,7 @@
     // Check if the value is in the database
     $validAlias = verifyAlias($randomCombination);
   }while($validAlias === 0);
+
 
   echo json_encode(["alias" => $randomCombination]);
 

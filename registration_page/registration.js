@@ -130,34 +130,51 @@ function submitOutput() {
       body: JSON.stringify({ filenames: imageFileNames }) // Send as JSON
   })
 
-  // Send the user ailias to the set alias PHP file
-  const setAilias = fetch('update_alias.php', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ alias: alias }) // Send as JSON
-  })
+  // Chain the promises to ensure setPass runs first
+  setPass
+      .then(response => {
+          // Ensure setPass was successful before moving to setAlias
+          if (!response.ok) {
+              throw new Error('setPass failed');
+          }
+          return response.json();  // Handle response from setPass
+      })
+      .then(data => {
+          console.log('setPass succeeded:', data);
+          // After setPass succeeds, start setAlias
 
-  Promise.all([setPass, setAilias])
-        .then(responses => {
-            // Ensure both requests were successful
-            return Promise.all(responses.map(response => response.json()));
-        })
-        .then(data => {
-            // Handle the responses for both requests
-            console.log('Request 1 succeeded:', data[0]);
-            console.log('Request 2 succeeded:', data[1]);
-        })
-        .catch(error => {
-            console.error('Error:', error);  // Handle any errors
-        });
+          // Send the user ailias to the set alias PHP file
+          const setAlias = fetch('update_alias.php', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ alias: alias }) // Send as JSON
+          })
+          return setAlias;  // Return the setAlias fetch promise to chain it
+      })
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('setAlias failed');
+          }
+          return response.json();  // Handle response from setAlias
+      })
+      .then(data => {
+          console.log('setAlias succeeded:', data);
+      })
+      .catch(error => {
+          console.error('Error:', error);  // Handle any errors
+      });
 
+  // Show the loading indicator
+  document.getElementById('loadingIndicator').style.display = 'block';
   // Clear the output after the pattern has been submited
   snackbar('success', 'Your pattern has been set.', 5000);
-  setTimeout(function() {
-        window.location.href = '../tutorial';  // Change this URL to where you want to redirect
-  }, 3000); // 3000ms = 3 seconds
   clearOutput();
+
+  setTimeout(function() {
+      window.location.href = "/cybergame/tutorial";
+  }, 2000);
+
 
 }

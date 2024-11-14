@@ -1,5 +1,6 @@
 <?php
 require('../private/initialize.php');
+check_redirect();
 ?>
 <html lang="en">
 <?php include(PRIVATE_PATH . '/header.php'); ?>
@@ -12,7 +13,7 @@ require('../private/initialize.php');
       <div class="container">
         <div class="container">
             <div class="text-center mt-5">
-                <h1>Registration</h1>
+                <h1>Registration--<?php echo url_for('pick_passcode'); ?></h1>
                 <p class="lead">Welcome, space explorer! Your galactic journey begins here. Set your passcode to secure your adventure, and get your unique alias to represent you among the stars. If you'd like to explore a different identity, just click to generate a new alias.</p>
             </div>
             <div id="snackbar-container"></div>
@@ -30,6 +31,9 @@ require('../private/initialize.php');
             </div>
             <!-- The below code was created using the assistance of ChatGPT 4.0. All code was properly tested and works as intended -->
             <div id="output"></div>
+            <div id="loadingIndicator" style="display:blcok;">
+                <div class="spinner"></div>
+            </div>
             <div class="keyboard">
                 <?php
                 // Define an array of key images (placeholders for 18 keys)
