@@ -10,7 +10,7 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menu</a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="<?php echo url_for('pick_passcode'); ?>">Guess a Passcode</a></li>
-                        <li><a class="dropdown-item" href="<?php echo url_for('view_passcode'); ?>">View my Passcode</a></li>
+                        <li><a class="dropdown-item" href="<?php echo url_for('view_passcode'); ?>">View my Statistics</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="<?php echo url_for('tutorial'); ?>">Tutorial</a></li>
                         <li><a class="dropdown-item" href="<?php echo url_for('leaderboard'); ?>">Leaderboard</a></li>

@@ -252,10 +252,15 @@ footer {
 #aliasDisplay {
     font-size: 1.5rem;
     font-weight: bold;
+    margin-left: auto;
+    margin-right: auto; 
     text-align: center;
+    width: 600px;
     padding: 15px 25px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    display: block;
 
     /* Animation */
     animation: glow 1.5s infinite alternate;

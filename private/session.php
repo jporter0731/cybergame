@@ -6,6 +6,7 @@
     // Set a session variable to track the login status
     $_SESSION['loggedin'] = true;
     $_SESSION['username'] = $username;
+    $_SESSION['lastaccess'] = time();
   }
 
   function setUserID($id){
@@ -41,6 +42,8 @@
     	}
     }
 
+    //Reset the session timer
+    $_SESSION['lastaccess'] = time();
     return true;
   }
 

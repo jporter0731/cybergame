@@ -1,6 +1,7 @@
 <?php
 require('../private/initialize.php');
 require('compare_logic.php');
+session_start();
 
 // Get the information from the json sent from the html code
 $data = json_decode(file_get_contents('php://input'), true);

@@ -98,7 +98,7 @@ function get_user_pattern_difficulty($connection){
   $getDifficultySQL = "SELECT difficulty FROM patterns WHERE pattern_id=" . get_user_pattern($connection);
 
   //get the difficulty information
-  $difficulty_set = mysqli_query($connection, $getPatternSQL);
+  $difficulty_set = mysqli_query($connection, $getDifficultySQL);
   $difficulty_info = mysqli_fetch_assoc($difficulty_set);
 
   $difficulty = $difficulty_info['difficulty'];
@@ -239,7 +239,7 @@ function get_user_alias_from_pattern($connection, $patternID){
   $userAlias = $user['alias'];
 
   if ($userAlias === null){
-    return "Game Pattern " . $patternID;
+    return "Game Generated " . $patternID;
   }else{
     return $userAlias;
   }
@@ -254,7 +254,7 @@ function get_user_alias($connection){
   $userAlias = $user['alias'];
 
   if ($userAlias === null){
-    return "Game Pattern " . $patternID;
+    return "Game Generated " . $patternID;
   }else{
     return $userAlias;
   }
@@ -309,6 +309,10 @@ function update_score($connection, $pattern){
 
 //Calculate a passcodes score based on the ID number
 function calculate_passcode_score($connection, $patternID, $difficulty){
+  //Figure out how many correct guesses were made on a specific pattern
+  $correctGuessesSQL = "SELECT correct_guess FROM guesses WHERE correct_pattern=". $patternID . " AND correct_guess=1";
+  $correct_guess_set = mysqli_query($connection, $correctGuessesSQL);
+
   //Figure out how many guesses were made on a specific pattern
   $getGuessesSQL = "SELECT correct_guess FROM guesses WHERE correct_pattern=". $patternID;
   $guess_set = mysqli_query($connection, $getGuessesSQL);
@@ -341,12 +345,8 @@ function get_top_passcodes($connection){
   $pattern_set = mysqli_query($connection, $getPatternSQL);
 
   while($pattern = mysqli_fetch_assoc($pattern_set)){
-    //Figure out how many correct guesses were made on a specific pattern
-    $correctGuessesSQL = "SELECT correct_guess FROM guesses WHERE correct_pattern=". $patternID . "AND correct_guess=1";
-    $correct_guess_set = mysqli_query($connection, $correctGuessesSQL);
-
     $alias = get_user_alias_from_pattern($connection, $pattern['pattern_id']);
-
+    $alias .= $pattern['pattern_id'];
     // Get passcode score
     $score = calculate_passcode_score($connection, $pattern['pattern_id'], $pattern['difficulty']);
 

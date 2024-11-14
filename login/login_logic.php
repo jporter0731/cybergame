@@ -25,10 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Store the error message in the session
         $_SESSION['error'] = "Invalid credentials!";
-
+        
         // Redirect back to the login page
-        header("Location: index.php");
-        exit();
+        header("Location: ../login");
     }
 }
 ?>

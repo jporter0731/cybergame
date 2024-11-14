@@ -13,6 +13,7 @@
   require_once('functions.php');
   require_once('database.php');
   require_once('session.php');
+  session_start();
 
   $db = db_connect();
 ?>

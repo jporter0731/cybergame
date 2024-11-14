@@ -1,5 +1,11 @@
 <?php require('../private/initialize.php');
-session_start();  // Start the session
+session_start();
+
+// Check if there's an error message in the session
+if (isset($_SESSION['error'])) {
+    $error_message = $_SESSION['error'];  // Store the error message
+    unset($_SESSION['error']);  // Clear the error message from the session
+}
 
 $loggedIn = checkSession();
 
@@ -8,12 +14,6 @@ if ($loggedIn){
   header("Location: ../pick_passcode");
 }
 
-
-// Check if there's an error message in the session
-if (isset($_SESSION['error'])) {
-    $error_message = $_SESSION['error'];  // Store the error message
-    unset($_SESSION['error']);  // Clear the error message from the session
-}
 ?>
 
 <html lang="en">
