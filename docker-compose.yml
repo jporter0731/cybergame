@@ -1,0 +1,21 @@
+services:
+  cybergame:
+    image: cybergame
+    container_name: cybergame-webapp
+    restart: unless-stopped
+    ports:
+      - 7000:80
+  db:
+    image: mariadb
+    container_name: cybergame-mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: "0VBVvLtk!Rj%sJinW6UU"
+      MARIADB_USER: cybergame
+      MARIADB_PASSWORD: "zia8#My*uVw27Lg"
+      MARIADB_DATABASE: cybergame
+    volumes:
+      - ./database.sql:/docker-entrypoint-initdb.d/init.sql
+
+networks:
+  backend:
