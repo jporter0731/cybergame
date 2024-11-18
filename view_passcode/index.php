@@ -13,11 +13,15 @@
         <!-- Page content-->
         <div class="text-center mt-5">
             <h1><?php echo get_user_alias($db); ?>'s Statistics:</h1>
-            <p class="lead">Pattern Score:</p>
+            <p class="lead">Passcode Score:</p>
             <div id="aliasDisplay"><?php echo calculate_passcode_score($db, get_user_pattern($db, $_SESSION['username']), get_user_pattern_difficulty($db)); ?></div>
             <p class="lead">Guess Score:</p>
             <div id="aliasDisplay"><?php echo get_user_score($db); ?></div>
-            <p class="lead">Your Pattern:</p>
+            <p class="lead">Passcodes Solved:</p>
+            <div id="aliasDisplay"><?php echo generate_patterns_solved($db); ?></div>
+            <p class="lead">Guesses Per Passcode:</p>
+            <div id="aliasDisplay"><?php echo generate_guesses_per_pattern($db); ?></div>
+            <p class="lead">Your Passcode:</p>
             <div id="aliasDisplay">
               <div class="image-container">
                 <?php

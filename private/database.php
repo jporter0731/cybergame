@@ -41,7 +41,7 @@ function get_user_id($connection, $username){
   return $userID;
 }
 
-// Check whether the  exists in the Database
+// Check whether the pattern has been solved or not
 function pattern_solved($connection, $patternID){
     //SQL Query to get the list of patterns with a specific id
     $patternSQL = "SELECT * FROM guesses WHERE correct_pattern = " . $patternID;
@@ -171,7 +171,7 @@ function get_guess_info($connection){
 
 // Get the information about the patterns that you can guess (used for the pick_passcode page)
 function get_available_patterns($connection){
-  $getPatternSQL = "SELECT pattern_id, difficulty FROM patterns WHERE difficulty IS NOT NULL;";
+  $getPatternSQL = "SELECT pattern_id, difficulty FROM patterns WHERE difficulty IS NOT NULL";
   $pattern_set = mysqli_query($connection, $getPatternSQL);
 
   while($pattern = mysqli_fetch_assoc($pattern_set)){
@@ -230,6 +230,7 @@ function get_available_patterns($connection){
   return $passcodes;
 }
 
+// Get the user alias from the pattern that was passed in
 function get_user_alias_from_pattern($connection, $patternID){
   // Connect the pattern id to a user
   $userPatternSQL = "SELECT alias FROM users WHERE user_pattern=". $patternID;
@@ -245,6 +246,7 @@ function get_user_alias_from_pattern($connection, $patternID){
   }
 }
 
+// Get the alias of the user that is signed in
 function get_user_alias($connection){
   // Connect the pattern id to a user
   $userPatternSQL = "SELECT alias FROM users WHERE user_id=". $_SESSION['user_id'];
@@ -260,7 +262,7 @@ function get_user_alias($connection){
   }
 }
 
-//Get the users score
+//Get the signed in user's score
 function get_user_score($connection){
   //Get the user score
   $userScoreSQL = "SELECT score FROM users WHERE user_id=". $_SESSION['user_id'];
@@ -320,18 +322,18 @@ function calculate_passcode_score($connection, $patternID, $difficulty){
 
   // Get the pattern base score
   if($difficulty === "Easy"){
-    $score = 25;
+    $score = 250;
   }elseif($difficulty === "Medium"){
-    $score = 50;
+    $score = 500;
   }else{
-    $score = 100;
+    $score = 1000;
   }
 
   // Get the count of the guesses
-  $score += (mysqli_num_rows($guess_set) * 10);
+  $score += (mysqli_num_rows($guess_set) * 100);
 
   // Get the count of the correct guesses
-  $score -= (mysqli_num_rows($correct_guess_set) * 25);
+  $score -= (mysqli_num_rows($correct_guess_set) * 250);
 
   return $score;
 }
@@ -341,7 +343,7 @@ function get_top_passcodes($connection){
   // Setup the ranking array
   $rankedArray = [];
 
-  $getPatternSQL = "SELECT pattern_id, difficulty FROM patterns WHERE difficulty IS NOT NULL;";
+  $getPatternSQL = "SELECT pattern_id, difficulty FROM patterns WHERE difficulty IS NOT NULL";
   $pattern_set = mysqli_query($connection, $getPatternSQL);
 
   while($pattern = mysqli_fetch_assoc($pattern_set)){
@@ -349,10 +351,14 @@ function get_top_passcodes($connection){
     // Get passcode score
     $score = calculate_passcode_score($connection, $pattern['pattern_id'], $pattern['difficulty']);
 
-    $rankedArray[] = [
-      'score' => $score,
-      'passcode' => $alias
-    ];
+    // Check if $alias does not contain "Game Generated"
+    if (strpos($alias, 'Game Generated') === false) {
+        // Add to rankedArray only if alias does not contain "Game Generated"
+        $rankedArray[] = [
+            'score' => $score,
+            'passcode' => $alias
+        ];
+    }
   }
 
   usort($rankedArray, function($a, $b) {
@@ -410,5 +416,41 @@ function get_top_users($connection){
     }
 
   return $topTenArray;
+}
+
+// This function generates a percentage of solved patterns for the user to see
+function generate_patterns_solved($connection){
+    //Get total pattern count
+    $getPatternSQL = "SELECT * FROM patterns WHERE difficulty IS NOT NULL";
+    $pattern_set = mysqli_query($connection, $getPatternSQL);
+    $totalPatterns = mysqli_num_rows($pattern_set) - 1; // This is -1 because you can't solve your own passcode
+
+    //Get correct patterns
+    $getSolvedPatternSQL = "SELECT * FROM guesses WHERE user_guessing = '" . $_SESSION['user_id'] . "' AND correct_guess = 1";
+    $solved_pattern_set = mysqli_query($connection, $getSolvedPatternSQL);
+    $solvedPatterns = mysqli_num_rows($solved_pattern_set);
+
+    //Generate the percentage of solved patterns
+    $percentage = ($totalPatterns > 0) ? ($solvedPatterns / $totalPatterns) * 100 : 0;
+    $patternString = number_format($percentage) . "%";
+    return $patternString;
+}
+
+// FIXME Function to generate guesses per pattern
+function generate_guesses_per_pattern($connection){
+  //Get total guesses count
+  $totalGuessesSQL = "SELECT * FROM guesses WHERE user_guessing = " . $_SESSION['user_id'];
+  $total_guesses_set = mysqli_query($connection, $totalGuessesSQL);
+  $totalGuesses = mysqli_num_rows($total_guesses_set);
+
+  //Get correct guesses count
+  $correctGuessesSQL = "SELECT * FROM guesses WHERE user_guessing = '" . $_SESSION['user_id'] . "' AND correct_guess = 1";
+  $correct_guesses_set = mysqli_query($connection, $correctGuessesSQL);
+  $correctGuesses = mysqli_num_rows($correct_guesses_set);
+
+  //Generate the guesses per passcode value
+  $guessesPerPattern = number_format(($totalGuesses/$correctGuesses), 2);
+
+  return $guessesPerPattern;
 }
 ?>

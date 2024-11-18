@@ -34,15 +34,15 @@ check_redirect();?>
                 <div class="card" style="width: 36rem; margin: auto; text-align: center;">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"><strong>Difficulty Base Score</strong><br/>
-                          <span style="margin-right: 20px;">Easy: 25 pts</span>
-                          <span style="margin-right: 20px;">Medium: 50 pts</span>
-                          <span>Hard: 100 pts</span>
+                          <span style="margin-right: 20px;">Easy: 250 pts</span>
+                          <span style="margin-right: 20px;">Medium: 500 pts</span>
+                          <span>Hard: 1000 pts</span>
                         </li>
                         <li class="list-group-item"><strong>Solved Passcode Count</strong><br/>
-                          <span>-25 pts/guess</span>
+                          <span>-250 pts/guess</span>
                         </li>
                         <li class="list-group-item"><strong>Total Guesses</strong><br/>
-                          <span>10 pts/guess</span>
+                          <span>100 pts/guess</span>
                         </li>
                     </ul>
                 </div>
