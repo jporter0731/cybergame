@@ -1,3 +1,3 @@
 # Galactic Codebreaker
-## Compare
 **Author:** jporter0731
+## TODO: PUT README HERE
