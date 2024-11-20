@@ -1,5 +1,6 @@
 <?php
 require('../private/initialize.php');
+require('ldap_logic.php');
 session_start();  // Start the session
 
 //Check the entered username and password against expected
@@ -8,9 +9,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // FIXME Add ldap authentication here.
     //Check if the username is in the array
-    if (array_key_exists($username, USER_CREDENTIALS) && USER_CREDENTIALS[$username] === $password) {
+    if (user_authorization($username, $password)) {
         $count = user_exists($db, $username);
         //Start the session
         startSession($username);
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Store the error message in the session
         $_SESSION['error'] = "Invalid credentials!";
-        
+
         // Redirect back to the login page
         header("Location: ../login");
     }
