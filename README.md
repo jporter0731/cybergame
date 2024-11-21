@@ -1,6 +1,8 @@
 # Galactic Codebreaker
 **Authors:** jporter0731, robweber
 
+![Home Page Screenshot](https://github.com/jporter0731/cybergame/blob/master/screenshots/Home%20Page.png)
+
 A PHP passcode game to reinforce passcode importance.
 ## Background
 Businesses are always looking for alternative ways to reinforce important topics in the workplace without always using a meeting or memo. That is the thought process that led to the idea of Galactic Codebreaker. It is an abstract combination of popular games while also being a unique way to help reinforce the importance of complex passcodes. This game straddles the line between fun gameplay and learning tool for the workplace. The creative decision was made to make the game more fun to play than it is a learning tool. The idea being that we wanted the game to be fun enough so that employees would take time out of their busy days to play it.
