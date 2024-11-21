@@ -45,7 +45,10 @@ if ($loggedIn){
                   <!-- Password input -->
                   <div class="mb-3">
                       <label for="password" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                      <div class="input-group">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                        <button type="button" class="btn btn-outline-secondary" id="togglePassword" onclick="togglePassword()">Show</button>
+                      </div>
                   </div>
                   <!-- Submit button -->
                   <div class="d-grid gap-2">
@@ -54,8 +57,24 @@ if ($loggedIn){
               </form>
           </div>
       </div>
-  </div>
     </div>
+    </div>
+    <script>
+        // Select the button and password field
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordField = document.getElementById('password');
 
+        // Attach event listener to button for toggling password visibility
+        togglePassword.addEventListener('click', function() {
+          // Check if password is hidden or visible
+          if (passwordField.type === 'password') {
+            passwordField.type = 'text';  // Change type to 'text' to show password
+            togglePassword.textContent = 'Hide';  // Change button text to 'Hide'
+          } else {
+            passwordField.type = 'password';  // Change type back to 'password' to hide password
+            togglePassword.textContent = 'Show';  // Change button text to 'Show'
+          }
+        });
+      </script>
   </body>
 <?php include(PRIVATE_PATH . '/footer.php'); ?>

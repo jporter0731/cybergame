@@ -1,7 +1,7 @@
 <?php
 
 // Require database credentials to allow for easy logins
-require_once('db_credentials.php');
+require_once('credentials.php');
 
 // Get connected to the database based on the login infomration
 function db_connect(){
